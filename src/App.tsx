@@ -7,7 +7,7 @@ function App() {
     <>
       <header>
         <span className={style.logo}>
-          <h1>Sistema</h1>
+          <h1>Viraliza</h1>
           <div className={style.logoIcon}>
             <span className={style.logoIconSpan}></span>
             <span className={style.logoIconSpan}></span>
