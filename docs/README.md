@@ -28,6 +28,10 @@ Este projeto foi desenvolvido exclusivamente para **estudo, demonstração de co
 
 A aplicação não possui finalidade comercial.
 
+## Api
+
+Atualmente o projeto está usando um servidor local de Mock Api usando prism ``@stoplight/prism-cli``, e o contrato da Api está sendo desenvolvido no arquivo ``OpenApi.yaml``.
+
 ## Direitos autorais
 
 © 2026 Timas. Todos os direitos reservados.
