@@ -1,0 +1,347 @@
+openapi: 3.0.4
+info:
+  version: 1.0.0
+  description: 'Api contract for a social network called "Viraliza"'
+  license: 
+    name: "All rights reserved. This api is made publicly available for demonstration and portfolio purposes. The code is not licensed for reuse, modification, or distribution."
+  title: "Viraliza API"
+
+tags:
+  - name: Users
+    description: Operações relacionadas aos usuários
+
+  - name: Posts
+    description: Operações relacionadas às postagens
+
+paths:
+  /api/posts:
+    get:
+      tags: 
+      -  Posts
+      summary: Lista todas as postagens
+      description: Retorna todas as postagens disponíveis. Não é necessário estar autenticado.
+      responses:
+        '200':
+          description: Lista de postagens retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+
+    post:
+      tags: 
+      -  Posts
+      summary: Cria uma nova postagem
+      description: Cria uma postagem para o usuário autenticado.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCreate'
+      responses:
+        '201':
+          description: Postagem criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Dados da postagem inválidos
+        '401':
+          description: Usuário não autenticado
+
+  /api/posts/{id}:
+    get:
+      tags: 
+      -  Posts
+      summary: Busca uma postagem
+      description: Retorna uma postagem específica. Não é necessário estar autenticado.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da postagem
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Postagem encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '404':
+          description: Postagem não encontrada
+
+    patch:
+      tags: 
+      -  Posts
+      summary: Edita uma postagem
+      description: Edita a mensagem de uma postagem pertencente ao usuário autenticado. Apenas o autor da postagem que possuir uma conta premium pode realizar a edição.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da postagem
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostMessageUpdate'
+      responses:
+        '204':
+          description: Postagem atualizada com sucesso
+        '400':
+          description: Dados da postagem inválidos
+        '401':
+          description: Usuário não autenticado
+        '403':
+          description: Usuário não possui permissão para editar esta postagem
+        '404':
+          description: Postagem não encontrada
+
+      delete:
+      tags:
+        - Posts
+      summary: Exclui uma postagem
+      description: Exclui uma postagem pertencente ao usuário autenticado. Apenas o autor da postagem pode realizar a exclusão.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da postagem
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Postagem excluída com sucesso
+        '401':
+          description: Usuário não autenticado
+        '403':
+          description: Usuário não possui permissão para excluir esta postagem
+        '404':
+          description: Postagem não encontrada
+
+  /api/users:
+    get:
+      tags: 
+      -  Users
+      summary: Lista todos os usuários
+      description: Retorna todos os usuários cadastrados.
+      responses:
+        '200':
+          description: Lista de usuários retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+    post:
+      tags: 
+      -  Users
+      summary: Cria um novo usuário
+      description: Cadastra um novo usuário.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Dados do usuário inválidos
+        '409':
+          description: Usuário já cadastrado
+
+  /api/users/{username}:
+    get:
+      tags: 
+      -  Users
+      summary: Busca um usuário
+      description: Retorna as informações públicas de um usuário e suas postagens.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: Nome de usuário
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWithPosts'
+        '404':
+          description: Usuário não encontrado
+
+  /api/me:
+    get:
+      tags: 
+      -  Users
+      summary: Obtém o usuário autenticado
+      description: Retorna as informações do usuário atualmente autenticado.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Informações do usuário retornadas com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Usuário não autenticado
+
+    patch:
+      tags: 
+      -  Users
+      summary: Atualiza o usuário autenticado
+      description: Atualiza as informações do usuário atualmente autenticado.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '204':
+          description: Usuário atualizado com sucesso
+        '400':
+          description: Dados do usuário inválidos
+        '401':
+          description: Usuário não autenticado
+        '409':
+          description: Dados fornecidos já estão em uso
+
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Meu primeiro post
+        message:
+          type: string
+          example: Este é o conteúdo da minha postagem.
+        author:
+          type: string
+          example: timas
+      required:
+        - id
+        - title
+        - message
+        - author
+
+    PostCreate:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Meu primeiro post
+        message:
+          type: string
+          example: Este é o conteúdo da minha postagem.
+      required:
+        - title
+        - message
+
+    PostMessageUpdate:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Conteúdo atualizado da postagem.
+      required:
+        - message
+  
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          example: timas
+        name:
+          type: string
+          example: Timas
+        premium:
+          type: boolean
+          example: true
+      required:
+        - username
+        - name
+        - premium
+
+    UserCreate:
+      type: object
+      properties:
+        username:
+          type: string
+          example: timas
+        name:
+          type: string
+          example: Timas
+        email:
+          type: string
+          format: email
+          example: timas@email.com
+        password:
+          type: string
+          format: password
+          example: senha123
+      required:
+        - username
+        - name
+        - email
+        - password
+
+    UserUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+          example: timas
+        name:
+          type: string
+          example: Timas
+        email:
+          type: string
+          format: email
+          example: novo@email.com
+
+    UserWithPosts:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            posts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Post'
