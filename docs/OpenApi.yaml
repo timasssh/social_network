@@ -29,6 +29,201 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Post'
+              examples: 
+                posts:
+                  summary: lista de postagens
+                  value: 
+                  - id: 1
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 2
+                    title: Aprendendo React
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 3
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 4
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 5
+                    title: Primeira nota
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 6
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 7
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 8
+                    title: Aprendendo React
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 9
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 10
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 11
+                    title: Primeira nota
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 12
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 13
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 14
+                    title: Aprendendo React
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 15
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 16
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 17
+                    title: Primeira nota
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 18
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 19
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 20
+                    title: Aprendendo React
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 21
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
+
+                  - id: 22
+                    title: Meu primeiro post
+                    message: |
+                      Hoje comecei a desenvolver uma nova aplicação para
+                      estudar desenvolvimento de APIs REST e integração
+                      entre frontend e backend. Estou utilizando React,
+                      TypeScript e Java Spring Boot.
+
+                  - id: 23
+                    title: Primeira nota
+                    message: |
+                      Estou estudando React com TypeScript e começando a
+                      entender melhor como componentes, estados e efeitos
+                      funcionam. A ideia é utilizar esses conhecimentos
+                      para construir uma pequena rede social.
+
+                  - id: 24
+                    title: Desenvolvimento de APIs
+                    message: |
+                      Uma das partes mais interessantes deste projeto está
+                      sendo aprender a projetar a API antes de começar sua
+                      implementação. O OpenAPI está ajudando a definir
+                      claramente como o frontend e o backend irão se comunicar.
 
     post:
       tags: 
@@ -110,7 +305,7 @@ paths:
         '404':
           description: Postagem não encontrada
 
-      delete:
+    delete:
       tags:
         - Posts
       summary: Exclui uma postagem
@@ -250,7 +445,10 @@ components:
           example: Meu primeiro post
         message:
           type: string
-          example: Este é o conteúdo da minha postagem.
+          example: | 
+            Hoje comecei a desenvolver uma nova aplicação para estudar desenvolvimento de APIs REST e integração entre frontend e backend. 
+            Estou utilizando React e TypeScript no frontend e Java com Spring Boot no backend. 
+            A ideia é construir uma pequena rede social como projeto de estudo e portfólio.
         author:
           type: string
           example: timas

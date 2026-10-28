@@ -15,11 +15,11 @@ async function fetchPosts() : Promise<Post[]> {
 
     const data = await response.json();
 
-    return data.data;
+    return data;
 }
 
 export function PostsList() {
-    let fetchLoading = true;
+    const [fetchLoading, setFetchLoading] = useState(true);
     const [posts, setPosts] = useState<Post[]>([]);
     const [error, setError] = useState<Error | null>(null);
 
@@ -28,7 +28,7 @@ export function PostsList() {
             try {
                 const data = await fetchPosts();
                 setPosts(data);
-                fetchLoading = false;
+                setFetchLoading(false);
             } catch (error) {
                 if (error instanceof Error) {
                     setError(error);
@@ -43,6 +43,6 @@ export function PostsList() {
     }
    
     return <section className={style.postsList}>
-        {fetchLoading ? <LoadingComponent text="Carregando"/> : posts.map((post, index) => <PostComponent key={index} title={post.title} message={post.message} />)}
+        {fetchLoading ? <LoadingComponent text="Carregando"/> : posts.map((post) => <PostComponent key={post.id} title={post.title} message={post.message} />)}
     </section>
 }
