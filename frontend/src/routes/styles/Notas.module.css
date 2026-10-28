@@ -5,3 +5,47 @@
     align-items: center;
     justify-content: center;
 }
+
+.createPostButton {
+    cursor: pointer;
+    
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    
+    height: 5rem;
+    width: 5rem;
+    aspect-ratio: 1/1;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background-color: #E9E9E9;
+
+    border-radius: 50%;
+
+    transition: 0.7s;
+}
+.createPostButton:hover {
+    background-color: #4949F940;
+}
+.createPostButton::before {
+    display: none;
+
+    content: "postar";
+    position: absolute;
+    top: 0px;
+    background-color: #E9E9E9;
+    padding: 0.5rem;
+    border-radius: 1rem;
+
+    transform: translateY(-120%);
+    transition: 0.7s;
+}
+.createPostButton:hover::before {
+    display: block;
+    background-color: #4949F940;
+}
