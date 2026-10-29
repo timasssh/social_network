@@ -1,0 +1,83 @@
+.createPostButton {
+    cursor: pointer;
+    
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    
+    height: 5rem;
+    width: 5rem;
+    aspect-ratio: 1/1;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background-color: #E9E9E9;
+
+    border-radius: 50%;
+
+    transition: 0.7s;
+}
+.createPostButton:hover {
+    background-color: #4949F940;
+}
+.createPostButton::before {
+    display: none;
+
+    content: "postar";
+    position: absolute;
+    top: 0px;
+    background-color: #E9E9E9;
+    padding: 0.5rem;
+    border-radius: 1rem;
+
+    transform: translateY(-120%);
+    transition: 0.7s;
+}
+.createPostButton:hover::before {
+    display: block;
+    background-color: #4949F940;
+}
+
+.messageArea {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.messageArea textarea {
+    width: 100%;
+}
+.charactersCounter {
+    font-weight: 200;
+    font-size: small;
+}
+
+.menu {
+    width: 100%;
+    height: 100%;
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    transform: translateY(-50%) translateX(-50%);
+
+    background-color: #00000080;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+body:has(.menu) {
+    overflow: hidden;
+}
+.closeMenuButton {
+    place-self: end;
+
+    width: 3rem;
+}

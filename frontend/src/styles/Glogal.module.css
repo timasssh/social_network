@@ -1,0 +1,43 @@
+form {
+    background-color: #E9E9E9;
+    display: grid;
+    /* flex-direction: column; */
+    width: 40vw;
+    min-height: 60%;
+    grid-template-rows: auto auto auto auto 1fr;
+    gap: 1ch;
+
+    padding: 3ch 3ch;
+}
+input {
+    border: none;
+    background-color: #F9F9FF;
+    outline: none;
+    padding: 1ch;
+
+    border: 1px solid transparent;
+
+    transition: 0.3s;
+}
+input:focus {
+    border: 1px dashed #4040F9;
+}
+input[type="submit"] {
+    place-self: end;
+    height: min-content;
+    width: 100%;
+    background-color: #494949;
+    color: #fff;
+
+    font-family: Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: large;
+}
+input[type="submit"]:hover {
+    background-color: #4949f9;
+}
+form textarea {
+    resize: none;
+
+    min-height: 8ch;
+}

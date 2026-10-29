@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 import style from "./styles/App.module.css"
 import { Link } from "react-router-dom"
 import { LogoComponent } from "./routes/components/LogoComponent"
+import globalStyle from "./styles/Glogal.module.css"
 
 function App() {
   return (
