@@ -40,6 +40,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "timas"
+                    likes: 100
 
                   - id: 2
                     title: Aprendendo React
@@ -48,6 +50,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "mario"
+                    likes: 310
 
                   - id: 3
                     title: Desenvolvimento de APIs
@@ -56,6 +60,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "timas"
+                    likes: 90
 
                   - id: 4
                     title: Meu primeiro post
@@ -64,6 +70,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "debs"
+                    likes: 1000
 
                   - id: 5
                     title: Primeira nota
@@ -72,6 +80,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "ariju"
+                    likes: 240
 
                   - id: 6
                     title: Desenvolvimento de APIs
@@ -80,6 +90,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "carlos_marighella"
+                    likes: 752
 
                   - id: 7
                     title: Meu primeiro post
@@ -88,6 +100,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "leonel_brizola"
+                    likes: 10
 
                   - id: 8
                     title: Aprendendo React
@@ -96,6 +110,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "leonel_brizola"
+                    likes: 4059
 
                   - id: 9
                     title: Desenvolvimento de APIs
@@ -104,6 +120,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "carlos_marighella"
+                    likes: 356
 
                   - id: 10
                     title: Meu primeiro post
@@ -112,6 +130,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "debs"
+                    likes: 924
 
                   - id: 11
                     title: Primeira nota
@@ -120,6 +140,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "ariju"
+                    likes: 0
 
                   - id: 12
                     title: Desenvolvimento de APIs
@@ -128,6 +150,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "mao_tse_tung"
+                    likes: 87
 
                   - id: 13
                     title: Meu primeiro post
@@ -136,6 +160,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "mao_tse_tung"
+                    likes: 2300
 
                   - id: 14
                     title: Aprendendo React
@@ -144,6 +170,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "mao_tse_tung"
+                    likes: 567
 
                   - id: 15
                     title: Desenvolvimento de APIs
@@ -152,6 +180,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "che_guevara"
+                    likes: 324
 
                   - id: 16
                     title: Meu primeiro post
@@ -160,6 +190,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "che_guevara"
+                    likes: 675
 
                   - id: 17
                     title: Primeira nota
@@ -168,6 +200,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "che_guevara"
+                    likes: 897
 
                   - id: 18
                     title: Desenvolvimento de APIs
@@ -176,6 +210,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "che_guevara"
+                    likes: 2339
 
                   - id: 19
                     title: Meu primeiro post
@@ -184,6 +220,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "carlos_marighella"
+                    likes: 4517
 
                   - id: 20
                     title: Aprendendo React
@@ -192,6 +230,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "debs"
+                    likes: 10342
 
                   - id: 21
                     title: Desenvolvimento de APIs
@@ -200,6 +240,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "ariju"
+                    likes: 7
 
                   - id: 22
                     title: Meu primeiro post
@@ -208,6 +250,8 @@ paths:
                       estudar desenvolvimento de APIs REST e integração
                       entre frontend e backend. Estou utilizando React,
                       TypeScript e Java Spring Boot.
+                    author: "ariju"
+                    likes: 8910
 
                   - id: 23
                     title: Primeira nota
@@ -216,6 +260,8 @@ paths:
                       entender melhor como componentes, estados e efeitos
                       funcionam. A ideia é utilizar esses conhecimentos
                       para construir uma pequena rede social.
+                    author: "mao_tse_tung"
+                    likes: 4467
 
                   - id: 24
                     title: Desenvolvimento de APIs
@@ -224,6 +270,8 @@ paths:
                       sendo aprender a projetar a API antes de começar sua
                       implementação. O OpenAPI está ajudando a definir
                       claramente como o frontend e o backend irão se comunicar.
+                    author: "che_guevara"
+                    likes: 8720
 
     post:
       tags: 
@@ -452,11 +500,15 @@ components:
         author:
           type: string
           example: timas
+        likes: 
+          type: integer
+          example: 10
       required:
         - id
         - title
         - message
         - author
+        - likes
 
     PostCreate:
       type: object
