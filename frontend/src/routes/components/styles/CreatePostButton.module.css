@@ -45,7 +45,7 @@
 .messageArea {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    /* align-items: end; */
 }
 .messageArea textarea {
     width: 100%;
@@ -53,6 +53,7 @@
 .charactersCounter {
     font-weight: 200;
     font-size: small;
+    place-self: end;
 }
 
 .menu {
@@ -80,4 +81,18 @@ body:has(.menu) {
     place-self: end;
 
     width: 3rem;
+}
+
+.errorMessage {
+    color: #ff0000;
+    font-size: small;
+}
+
+.menu [aria-invalid="true"] {
+    outline: #ff0000 solid 2px;
+}
+.formularyInputMessageSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
