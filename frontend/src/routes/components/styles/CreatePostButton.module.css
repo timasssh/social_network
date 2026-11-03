@@ -83,11 +83,6 @@ body:has(.menu) {
     width: 3rem;
 }
 
-.errorMessage {
-    color: #ff0000;
-    font-size: small;
-}
-
 .menu [aria-invalid="true"] {
     outline: #ff0000 solid 2px;
 }

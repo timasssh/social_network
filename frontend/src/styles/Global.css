@@ -41,3 +41,8 @@ form textarea {
 
     min-height: 8ch;
 }
+
+.errorMessage {
+    color: #ff0000;
+    font-size: small;
+}

@@ -94,13 +94,13 @@ export function CreatePostButton() {
                 <section className={style.formularyInputMessageSection}>
                     <input onInput={(event) => handleInput(event.currentTarget.value, setTitle)} type="text" name="postTitle" id="postTitleInput"maxLength={maxCharactersPostTitle}  />
                     <span className={style.charactersCounter}>{title.length + "/" + maxCharactersPostTitle}</span>
-                    <span className={style.errorMessage}>{errors.title}</span>
+                    <span className="errorMessage">{errors.title}</span>
                 </section>
                 <label htmlFor="postMessageInput">Digite a mensagem do post:</label>
                 <section className={style.messageArea}>
                     <textarea onInput={(event) => handleInput(event.currentTarget.value, setMessage)} name="postMessage" id="postMessageInput" maxLength={maxCharactersPostMessage} ></textarea>
                     <span className={style.charactersCounter}>{message.length + "/" + maxCharactersPostMessage}</span>
-                    <span className={style.errorMessage}>{errors.message}</span>
+                    <span className="errorMessage">{errors.message}</span>
                 </section>
 
 
