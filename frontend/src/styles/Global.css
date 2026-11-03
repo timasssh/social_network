@@ -41,6 +41,11 @@ form textarea {
 
     min-height: 8ch;
 }
+form section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 .errorMessage {
     color: #ff0000;

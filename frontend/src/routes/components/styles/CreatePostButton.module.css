@@ -86,8 +86,3 @@ body:has(.menu) {
 .menu [aria-invalid="true"] {
     outline: #ff0000 solid 2px;
 }
-.formularyInputMessageSection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
