@@ -5,18 +5,7 @@ import { LoadingComponent } from "./LoadingComponent";
 import type Post from "../types/Post";
 
 import style from "./styles/PostsList.module.css";
-
-async function fetchPosts() : Promise<Post[]> {
-    const response = await fetch("/api/posts");
-    
-    if (!response.ok) {
-        throw new Error(`Erro HTTP: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-}
+import { fetchPosts } from "../services/PostService";
 
 export function PostsList() {
     const [fetchLoading, setFetchLoading] = useState(true);
