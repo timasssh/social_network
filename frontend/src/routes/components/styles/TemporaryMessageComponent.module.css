@@ -1,0 +1,70 @@
+.messageWrapper {
+    background-color: #E9E9E9;
+    padding: 0.5rem 3rem;
+    width: 28rem;
+    border-radius: 3rem;
+
+    display: grid;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: 1fr auto;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progressBar {
+    width: 100%;
+    height: 0.3rem;
+    background-color: #494949;
+    overflow: hidden;
+
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.progressLoad {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #4949f9;
+
+    transform-origin: left;
+    animation-name: progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.closeMessageButton {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    
+    cursor: pointer;
+    border: none;
+
+    background-color: #494949;
+    transition: 0.3s;
+    color: #FFF;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.closeMessageButton:hover {
+    background-color: #4949f9;
+}
+
+@keyframes progress {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
