@@ -51,3 +51,6 @@ form section {
     color: #ff0000;
     font-size: small;
 }
+.simpleShadow {
+    box-shadow: #00000040 6px 10px 8px;
+}

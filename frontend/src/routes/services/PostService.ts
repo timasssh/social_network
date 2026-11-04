@@ -2,13 +2,15 @@ import type Post from "../types/Post";
 
 export async function fetchNewPost(
     title: string,
-    message: string
+    message: string,
+    token: string | null
 ): Promise<Post> {
     const response = await fetch("/api/posts", {
         method: "POST",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
             title,

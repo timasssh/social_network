@@ -6,8 +6,11 @@ import style from "./styles/CreatePostButton.module.css"
 import type Post from "../types/Post";
 import { fetchNewPost } from "../services/PostService";
 import { LoadingComponent } from "./LoadingComponent";
+import { TemporaryMessageComponent } from "./TemporaryMessageComponent";
 
 export function CreatePostButton() {
+    if(!sessionStorage.getItem("token")) return null;
+
     const [menuIsHidden, setMenuIsHidden] = useState(true);
 
     const maxCharactersPostTitle = 32;
@@ -42,6 +45,7 @@ export function CreatePostButton() {
         event.preventDefault();
 
         clearErrors();
+        setCreatedPost(null);
 
         const trimmedTitle = title.trim();
         const trimmedMessage = message.trim();
@@ -60,7 +64,8 @@ export function CreatePostButton() {
 
             const data = await fetchNewPost(
                 trimmedTitle,
-                trimmedMessage
+                trimmedMessage,
+                sessionStorage.getItem("token")
             );
 
             setCreatedPost(data);
@@ -78,12 +83,13 @@ export function CreatePostButton() {
             }
         } finally {
             setFetchLoading(false);
-
-            // console.log(createdPost);
         }
     }
 
     return <>
+        {createdPost !== null && <TemporaryMessageComponent displayingSeconds={3} text="Post criado com sucesso!" />}
+        {fetchError !== null && <TemporaryMessageComponent displayingSeconds={3} text={"Error: " + fetchError} />}
+    
         <button onClick={() => setMenuIsHidden(!menuIsHidden)} aria-description="button to create a post; button to post something in your account" className={style.createPostButton}><LogoComponent onlyIcon={true} /></button>
 
         {!menuIsHidden && <article className={style.menu}>

@@ -8,7 +8,7 @@ type cardProps = {
 }
 
 export function CardComponent(cardProps: cardProps) {
-    return <article className={style.card}>
+    return <article className={style.card + " simpleShadow"}>
         <h3>{cardProps.title}</h3>
         <p>{cardProps.text}</p>
         <img className={style.card_image} src={cardProps.image_url.toString()} alt={cardProps.image_alt} />

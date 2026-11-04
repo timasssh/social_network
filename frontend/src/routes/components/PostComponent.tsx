@@ -27,7 +27,7 @@ export function PostComponent(postProps: postProps) {
         setLikesTotal(likesTotal - 1);
     }
 
-    return <article className={style.post}>
+    return <article className={style.post + " simpleShadow"}>
         <p className={style.postAuthor}>@{postProps.author}</p>
         <p className={style.postTitle}>{postProps.title}</p>
         <p>{postProps.message}</p>

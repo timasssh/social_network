@@ -9,8 +9,6 @@
 
     grid-template-columns: auto auto;
     grid-template-rows: 2rem max-content;
-
-    box-shadow: #00000040 6px 10px 8px;
 }
 
 @supports (animation-timeline: view()) {

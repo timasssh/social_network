@@ -22,7 +22,7 @@ export function TemporaryMessageComponent(props: temporaryMessageProps) {
 
     if(!visible) return null;
     
-    return <article className={style.messageWrapper}>
+    return <article className={style.messageWrapper + " simpleShadow"}>
         <LoadingComponent text={props.text} />
         <section className={style.progressBar}>
             <span style={{animationDuration: `${props.displayingSeconds}s`}} className={style.progressLoad}></span>

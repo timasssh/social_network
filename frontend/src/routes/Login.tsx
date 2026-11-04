@@ -4,8 +4,11 @@ import style from "./styles/Login_SignIn.module.css"
 import { Link } from "react-router-dom"
 import { fetchLogin } from "./services/AuthService";
 import type Authentication from "./types/Authentication";
+import { TemporaryMessageComponent } from "./components/TemporaryMessageComponent";
 
 export function Login() {
+    const [identified, setIdentified] = useState(false);
+
     const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
 
@@ -16,10 +19,13 @@ export function Login() {
         }
     );
 
+    const [fetchError, setFetchError] = useState("");
+
     const [authData, setAuthData] = useState<Authentication>();
 
     function clearErrors() {
         setErrors({identifierError: "", passwordError: ""});
+        setFetchError("");
     }
 
     async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
@@ -31,9 +37,9 @@ export function Login() {
         const maxPasswordLength = 127;
         const maxIdentifierLength = 127;
 
-        const trimmedIdentifier = identifier.trim();
+        setIdentifier(identifier.trim());
 
-        if(trimmedIdentifier.length === 0 || trimmedIdentifier.length > maxIdentifierLength) {
+        if(identifier.length === 0 || identifier.length > maxIdentifierLength) {
             setErrors(current => ({...current, identifierError: "Digite um login válido!"}));
             return;
         }
@@ -43,46 +49,46 @@ export function Login() {
         }
         
         try {
-            // setFetchLoading(true);
-
             const data = await fetchLogin(
-                trimmedIdentifier,
+                identifier,
                 password
             );
 
             setAuthData(data);
-            // console.log(data);
+            if(data.accessToken) {
+                sessionStorage.setItem("token", data.accessToken);
+            }
 
-            // setTitle("");
-            // setMessage("");
+            setIdentifier("");
+            setPassword("");
 
-            // setMenuIsHidden(true);
+            setIdentified(true);
 
         } catch (error) {
             console.log(error);
-            // if (error instanceof Error) {
-            //     setFetchError(error.message);
-            // } else {
-            //     setFetchError("Ocorreu um erro inesperado.");
-            // }
+            if (error instanceof Error) {
+                setFetchError(error.message);
+            } else {
+                setFetchError("Ocorreu um erro inesperado.");
+            }
         } finally {
-            // setFetchLoading(false);
-
             console.log(authData);
         }
     }
 
     return <main>
+        {identified && <TemporaryMessageComponent text={"identified as " + authData?.user.name} displayingSeconds={3} />}
+        {fetchError !== "" && <TemporaryMessageComponent text={"Error: " + fetchError} displayingSeconds={3} />}
         <h1>Login</h1>
         <form method="post" onSubmit={handleSubmit}>
             <label htmlFor="loginInput">Digite seu email ou nome de usuário: </label>
             <section>
-                <input onChange={(event) => setIdentifier(event.currentTarget.value)} type="login" name="identifier" id="identifierInput"/>
+                <input value={identifier} onChange={(event) => setIdentifier(event.currentTarget.value)} type="login" name="identifier" id="identifierInput"/>
                 <span className="errorMessage">{errors.identifierError}</span>
             </section>
             <label htmlFor="passwordInput">Digite sua senha: </label>
             <section>
-                <input onChange={(event) => setPassword(event.currentTarget.value)} type="password" name="password" id="passwordInput"/>
+                <input value={password} onChange={(event) => setPassword(event.currentTarget.value)} type="password" name="password" id="passwordInput"/>
                 <span className="errorMessage">{errors.passwordError}</span>
             </section>
             
