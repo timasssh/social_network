@@ -1,4 +1,9 @@
 .messageWrapper {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    
     background-color: #E9E9E9;
     padding: 0.5rem 3rem;
     width: 28rem;
