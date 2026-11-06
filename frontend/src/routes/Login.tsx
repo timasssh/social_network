@@ -76,7 +76,7 @@ export function Login() {
         }
     }
 
-    return <main>
+    return <main className={style.main} >
         {identified && <TemporaryMessageComponent text={"identified as " + authData?.user.name} displayingSeconds={3} />}
         {fetchError !== "" && <TemporaryMessageComponent text={"Error: " + fetchError} displayingSeconds={3} />}
         <h1>Login</h1>

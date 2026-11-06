@@ -1,7 +1,13 @@
 .main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
 
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+    padding: 1rem;
+
+    grid-template-columns: 70% 25%;
+}
+.main *:nth-child(1), .main *:nth-child(2) {
+    grid-column-start: 0;
+    grid-column-end: 2;
 }
