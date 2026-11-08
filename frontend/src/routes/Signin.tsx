@@ -66,9 +66,10 @@ export function SignIn() {
             const data = await fetchSignin(username, email, password, passwordConfirmation);
 
             setAuthData(data);
-            if(data.accessToken) {
-                sessionStorage.setItem("token", data.accessToken);
-            }
+            
+            sessionStorage.setItem("token", data.accessToken);
+            sessionStorage.setItem("username", data.user.username);
+            sessionStorage.setItem("name", data.user.name);
 
             setUsername("");
             setEmail("");

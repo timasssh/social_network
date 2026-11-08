@@ -55,9 +55,9 @@ export function Login() {
             );
 
             setAuthData(data);
-            if(data.accessToken) {
-                sessionStorage.setItem("token", data.accessToken);
-            }
+            sessionStorage.setItem("token", data.accessToken);
+            sessionStorage.setItem("username", data.user.username);
+            sessionStorage.setItem("name", data.user.name);
 
             setIdentifier("");
             setPassword("");

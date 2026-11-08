@@ -1,0 +1,22 @@
+.userWrapper {
+    width: 100%;
+
+    display: grid;
+    padding: 1rem;
+    align-items: center;
+    justify-items: flex-start;
+    gap: 1rem;
+
+    grid-template-rows: 1fr;
+    grid-template-columns: min-content auto auto;
+
+    text-decoration: none;
+    color: #000;
+}
+.userWrapper:hover {
+    background-color: #00000008;
+}
+.userPhoto {
+    max-width: 2rem;
+    max-height: 2rem;
+}
