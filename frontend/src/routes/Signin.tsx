@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import style from "./styles/Login_SignIn.module.css"
 import { useState } from "react";
 import type Authentication from "./types/Authentication";
+import { fetchSignin } from "./services/AuthService";
+import { TemporaryMessageComponent } from "./components/TemporaryMessageComponent";
 
 export function SignIn() {
     const [identified, setIdentified] = useState(false);
@@ -60,19 +62,57 @@ export function SignIn() {
         }
 
         // TODO: fetch to API
+        try {
+            const data = await fetchSignin(username, email, password, passwordConfirmation);
+
+            setAuthData(data);
+            if(data.accessToken) {
+                sessionStorage.setItem("token", data.accessToken);
+            }
+
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setPasswordConfirmation("");
+
+            setIdentified(true);
+        } catch (error) {
+            console.log(error);
+            if (error instanceof Error) {
+                setFetchError(error.message);
+            } else {
+                setFetchError("Ocorreu um erro inesperado.");
+            }
+        } finally {
+            console.log(authData);
+        }
     }
 
     return <main className={style.main}>
+        {identified && <TemporaryMessageComponent text={"identified as " + authData?.user.name} displayingSeconds={3} />}
+        {fetchError !== null && <TemporaryMessageComponent text={"Error: " + fetchError} displayingSeconds={3} />}
         <h1>Cadastro</h1>
         <form method="post" onSubmit={handleSubmit}>
             <label htmlFor="usernameInput">Digite seu nome de usuário: </label>
-            <input onInput={(event) => setUsername(event.currentTarget.value)} type="text" name="username" id="usernameInput"/>
+            <section>
+                <input onInput={(event) => setUsername(event.currentTarget.value)} type="text" name="username" id="usernameInput"/>
+                <span className="errorMessage">{errors.usernameError}</span>
+            </section>
             <label htmlFor="emailInput">Digite seu email: </label>
-            <input onInput={(event) => setEmail(event.currentTarget.value)} type="email" name="email" id="emailInput"/>
+            <section>
+                <input onInput={(event) => setEmail(event.currentTarget.value)} type="text" name="email" id="emailInput"/>
+                <span className="errorMessage">{errors.emailError}</span>
+            </section>
             <label htmlFor="passwordInput">Digite sua senha: </label>
-            <input onInput={(event) => setPassword(event.currentTarget.value)} type="password" name="password" id="passwordInput"/>
+            <section>
+                <input onInput={(event) => setPassword(event.currentTarget.value)} type="password" name="password" id="passwordInput"/>
+                <span className="errorMessage">{errors.passwordError}</span>
+            </section>
             <label htmlFor="passwordConfirmationInput">Confirme sua senha: </label>
-            <input onInput={(event) => setPasswordConfirmation(event.currentTarget.value)} type="password" name="passwordConfirmation" id="passwordConfirmationInput"/>
+            <section>
+                <input onInput={(event) => setPasswordConfirmation(event.currentTarget.value)} type="password" name="passwordConfirmation" id="passwordConfirmationInput"/>
+                <span className="errorMessage">{errors.passwordConfirmationError}</span>
+            </section>
             
             <input type="submit" value="enviar" />
         </form>

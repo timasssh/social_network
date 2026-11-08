@@ -624,11 +624,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/RegisterResponse'
               example:
-                username: "usuario123"
-                name: "Usuário"
-                premium: false
+                accessToken: "eyJhbGciOiJIUzI1NiIs..."
+                tokenType: "Bearer"
+                expiresIn: 3600
+                user:
+                  username: "usuario123"
+                  name: "Usuário"
+                  premium: false
         '400':
           description: Invalid request data or passwords do not match
         '409':
@@ -815,6 +819,27 @@ components:
           type: string
           format: password
           example: "senha123"
+
+    RegisterResponse:
+      type: object
+      required:
+        - accessToken
+        - tokenType
+        - expiresIn
+        - user
+      properties:
+        accessToken:
+          type: string
+          description: JWT access token
+        tokenType:
+          type: string
+          example: "Bearer"
+        expiresIn:
+          type: integer
+          description: Token expiration time in seconds
+          example: 3600
+        user:
+          $ref: '#/components/schemas/User'
 
   securitySchemes:
     bearerAuth:
