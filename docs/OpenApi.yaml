@@ -396,6 +396,99 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+              examples: 
+                users:
+                  summary: lista de usuarios
+                  value: 
+                  - username: timas
+                    name: Timas da Silva
+                    premium: true
+                    followers: 2000
+
+                  - username: mao
+                    name: Mao Tsé Tung
+                    premium: false
+                    followers: 50000
+
+                  - username: carlos_marighella
+                    name: Carlos Marighella
+                    premium: true
+                    followers: 1732
+
+                  - username: debs
+                    name: Debs Heloisi
+                    premium: true
+                    followers: 16
+
+                  - username: cilia
+                    name: Cecília
+                    premium: false
+                    followers: 107
+                    
+                  - username: leonel_brizola
+                    name: Leonel Brizola
+                    premium: false
+                    followers: 904
+
+                  - username: mario
+                    name: Professor Mário
+                    premium: true
+                    followers: 94
+
+                  - username: hooks
+                    name: Bell Hooks
+                    premium: true
+                    followers: 1114
+                    
+                  - username: che_guevara
+                    name: Ernesto Che Guevara
+                    premium: false
+                    followers: 50498
+
+                  - username: jones
+                    name: Jones Manoel
+                    premium: true
+                    followers: 1000000
+
+                  - username: luffy
+                    name: Monkey D. Luffy
+                    premium: false
+                    followers: 748096
+
+                  - username: lenin
+                    name: Vladmir Ilich Lênin
+                    premium: false
+                    followers: 10752
+
+                  - username: ace
+                    name: Portgas D. Ace
+                    premium: true
+                    followers: 7093
+                    
+                  - username: farol_brasil
+                    name: Fasol Brasil
+                    premium: true
+                    followers: 10894
+                    
+                  - username: chico
+                    name: Chico Mendes
+                    premium: false
+                    followers: 407
+                    
+                  - username: science
+                    name: Chico Science
+                    premium: true
+                    followers: 12580
+
+                  - username: robin
+                    name: Nico Robin
+                    premium: false
+                    followers: 496
+                    
+                  - username: jake
+                    name: Jake o Cão
+                    premium: true
+                    followers: 10456
 
     post:
       tags: 
@@ -630,10 +723,14 @@ components:
         premium:
           type: boolean
           example: true
+        followers:
+          type: integer
+          example: 4912
       required:
         - username
         - name
         - premium
+        - followers
 
     UserCreate:
       type: object

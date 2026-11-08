@@ -28,7 +28,7 @@ export function PostsList() {
     }, []);
 
     if (error) {
-        return <ErrorComponent message={error.message} name={error.name} cause={error.cause} />
+        return <ErrorComponent errorTitle="Algo deu errado enquanto buscava os posts :(" error={error} />
     }
    
     return <section className={style.postsList}>

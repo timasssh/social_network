@@ -1,5 +1,6 @@
 export default interface User {
     username: string,
     name: string,
-    premium: boolean
+    premium: boolean,
+    followers: number
 }
