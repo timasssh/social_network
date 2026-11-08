@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import style from "./styles/Login_SignIn.module.css"
 
 export function SignIn() {
-    return <main>
+    return <main className={style.main}>
         <h1>Cadastro</h1>
         <form action="">
             <label htmlFor="usernameInput">Digite seu nome de usuário: </label>
