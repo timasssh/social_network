@@ -490,29 +490,6 @@ paths:
                     premium: true
                     followers: 10456
 
-    post:
-      tags: 
-      -  Users
-      summary: Cria um novo usuário
-      description: Cadastra um novo usuário.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserCreate'
-      responses:
-        '201':
-          description: Usuário criado com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          description: Dados do usuário inválidos
-        '409':
-          description: Usuário já cadastrado
-
   /api/users/{username}:
     get:
       tags: 

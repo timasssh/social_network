@@ -25,3 +25,33 @@ export async function fetchLogin(
 
     return data;
 }
+
+export async function fetchSignin(
+    username: string,
+    email: string,
+    password: string,
+    passwordConfirmation: string
+): Promise<Authentication> {
+    const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username,
+            email,
+            password,
+            passwordConfirmation
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
+    const data: Authentication = await response.json();
+    console.log(data);
+
+    return data;
+}
