@@ -77,7 +77,7 @@ export function Login() {
     }
 
     return <main className={style.main} >
-        {identified && <TemporaryMessageComponent text={"identified as " + authData?.user.name} displayingSeconds={3} />}
+        {identified && <TemporaryMessageComponent redirectionLink="/notas" text={"identified as " + authData?.user.name} displayingSeconds={3} />}
         {fetchError !== "" && <TemporaryMessageComponent text={"Error: " + fetchError} displayingSeconds={3} />}
         <h1>Login</h1>
         <form method="post" onSubmit={handleSubmit}>

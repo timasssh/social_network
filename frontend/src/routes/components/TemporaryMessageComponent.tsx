@@ -3,18 +3,24 @@ import { LoadingComponent } from "./LoadingComponent";
 
 import style from "./styles/TemporaryMessageComponent.module.css"
 import { GoX } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 type temporaryMessageProps = {
     text: string;
-    displayingSeconds: number
+    displayingSeconds: number;
+    redirectionLink?: string
 }
 
 export function TemporaryMessageComponent(props: temporaryMessageProps) {
     const [visible, setVisible] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setVisible(false);
+            if(props.redirectionLink) {
+                navigate(props.redirectionLink);
+            }
         }, props.displayingSeconds * 1000);
 
         return () => clearTimeout(timer);

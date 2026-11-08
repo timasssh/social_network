@@ -90,7 +90,7 @@ export function SignIn() {
     }
 
     return <main className={style.main}>
-        {identified && <TemporaryMessageComponent text={"identified as " + authData?.user.name} displayingSeconds={3} />}
+        {identified && <TemporaryMessageComponent redirectionLink="/notas" text={"identified as " + authData?.user.name} displayingSeconds={3} />}
         {fetchError !== null && <TemporaryMessageComponent text={"Error: " + fetchError} displayingSeconds={3} />}
         <h1>Cadastro</h1>
         <form method="post" onSubmit={handleSubmit}>

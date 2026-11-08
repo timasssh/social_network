@@ -6,6 +6,7 @@ import { UserLoggedDisplay } from "./routes/components/UserLoggedDisplayComponen
 
 function App() {
   const userIsAuthentified = sessionStorage.getItem("token") !== null;
+  // TODO: create AuthContext
 
   return (
     <>
