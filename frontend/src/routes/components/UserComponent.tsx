@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import style from "./styles/UserComponent.module.css"
 
 type userComponentProps = {
@@ -8,12 +9,12 @@ type userComponentProps = {
 }
 
 export function UserComponent(userComponentProps: userComponentProps) {
-    return <article className={style.userWrapper} >
+    return <Link to={"/user/"+userComponentProps.username} className={style.userWrapper} >
         <img className={style.userPhoto} src={userComponentProps.photo ? userComponentProps.photo : "/user_photo_icon.svg"} alt="user photo" />
         <section>
             <p>{userComponentProps.name}</p>
             <p>@{userComponentProps.username}</p>
         </section>
         <p>{userComponentProps.followers} followers</p>
-    </article>
+    </Link>
 }

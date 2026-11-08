@@ -10,6 +10,7 @@ import { Home } from './routes/Home.tsx'
 import { Login } from './routes/Login.tsx'
 import { Notas } from './routes/Notas.tsx'
 import { SignIn } from './routes/Signin.tsx'
+import { UserPage } from './routes/UserPage.tsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/notas",
         element: <Notas />
+      },
+      {
+        path: "/user/:username",
+        element: <UserPage />
       }
     ]
   }
