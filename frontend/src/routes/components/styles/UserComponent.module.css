@@ -1,0 +1,21 @@
+.userWrapper {
+    background-color: #494949;
+    color: #FFF;
+    width: 100%;
+
+    display: grid;
+    padding: 1rem;
+    align-items: center;
+    justify-items: flex-start;
+    gap: 1rem;
+
+    grid-template-rows: 1fr;
+    grid-template-columns: min-content auto auto;
+}
+.userPhoto {
+    max-width: 2rem;
+    max-height: 2rem;
+}
+.userWrapper > p {
+    justify-self: right;
+}
