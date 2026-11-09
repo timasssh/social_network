@@ -38,3 +38,33 @@ export async function fetchPosts() : Promise<Post[]> {
 
     return data;
 }
+export async function fetchLike(
+    postId: number,
+    token: string
+): Promise<void> {
+    const response = await fetch(`/api/posts/${postId}/like`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+}
+export async function fetchDislike(
+    postId: number,
+    token: string
+): Promise<void> {
+    const response = await fetch(`/api/posts/${postId}/like`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+}

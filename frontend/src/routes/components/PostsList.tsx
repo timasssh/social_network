@@ -32,6 +32,6 @@ export function PostsList() {
     }
    
     return <section className={style.postsList}>
-        {fetchLoading ? <LoadingComponent text="Carregando"/> : posts.map((post) => <PostComponent key={post.id} title={post.title} message={post.message} author={post.author} likes={post.likes} />)}
+        {fetchLoading ? <LoadingComponent text="Carregando"/> : posts.map((post) => <PostComponent key={post.id} id={post.id} title={post.title} message={post.message} author={post.author} likes={post.likes} />)}
     </section>
 }

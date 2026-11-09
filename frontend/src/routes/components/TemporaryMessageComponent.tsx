@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 type temporaryMessageProps = {
     text: string;
     displayingSeconds: number;
-    redirectionLink?: string
+    redirectionLink?: string;
+    setVariableToNull?: (value: null | any) => void;
 }
 
 export function TemporaryMessageComponent(props: temporaryMessageProps) {
@@ -20,6 +21,9 @@ export function TemporaryMessageComponent(props: temporaryMessageProps) {
             setVisible(false);
             if(props.redirectionLink) {
                 navigate(props.redirectionLink);
+            }
+            if(props.setVariableToNull) {
+                props.setVariableToNull(null);
             }
         }, props.displayingSeconds * 1000);
 

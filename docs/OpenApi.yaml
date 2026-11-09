@@ -381,6 +381,53 @@ paths:
         '404':
           description: Postagem não encontrada
 
+  /api/posts/{id}/like:
+    post:
+      tags:
+        - Posts
+      summary: Curte uma postagem
+      description: Registra uma curtida do usuário autenticado em uma postagem.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da postagem
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: Curtida registrada com sucesso
+        '401':
+          description: Usuário não autenticado
+        '404':
+          description: Postagem não encontrada
+        '409':
+          description: Usuário já curtiu esta postagem
+
+    delete:
+      tags:
+        - Posts
+      summary: Remove uma curtida
+      description: Remove a curtida do usuário autenticado em uma postagem.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da postagem
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Curtida removida com sucesso
+        '401':
+          description: Usuário não autenticado
+        '404':
+          description: Postagem não encontrada
+
   /api/users:
     get:
       tags: 
