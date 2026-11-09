@@ -4,8 +4,11 @@ import { useState } from "react";
 import type Authentication from "./types/Authentication";
 import { fetchSignin } from "./services/AuthService";
 import { TemporaryMessageComponent } from "./components/TemporaryMessageComponent";
+import { useAuth } from "./components/AuthProviderComponent";
 
 export function SignIn() {
+    const { login } = useAuth();
+    
     const [identified, setIdentified] = useState(false);
 
     const [username, setUsername] = useState("");
@@ -66,8 +69,8 @@ export function SignIn() {
             const data = await fetchSignin(username, email, password, passwordConfirmation);
 
             setAuthData(data);
-            
-            sessionStorage.setItem("token", data.accessToken);
+            login(data.accessToken);
+
             sessionStorage.setItem("username", data.user.username);
             sessionStorage.setItem("name", data.user.name);
 

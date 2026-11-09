@@ -2,11 +2,12 @@ import style from "./styles/UserLoggedDisplayCompponent.module.css"
 
 import { Link } from "react-router-dom";
 import { ErrorComponent } from "./ErrorComponent";
+import { useAuth } from "./AuthProviderComponent";
 
 export function UserLoggedDisplay() {
-    const userIsAuthentified = sessionStorage.getItem("token") !== null;
-
-    if(!userIsAuthentified) {
+    const { token } = useAuth();
+    
+    if(!token) {
         return <ErrorComponent error={new Error("Usuário não encontrado!")} errorTitle="Algo deu errado enquanto buscava usuário :(" />
     }
 

@@ -5,8 +5,11 @@ import { Link } from "react-router-dom"
 import { fetchLogin } from "./services/AuthService";
 import type Authentication from "./types/Authentication";
 import { TemporaryMessageComponent } from "./components/TemporaryMessageComponent";
+import { useAuth } from "./components/AuthProviderComponent";
 
 export function Login() {
+    const { login } = useAuth();
+    
     const [identified, setIdentified] = useState(false);
 
     const [identifier, setIdentifier] = useState("");
@@ -55,7 +58,8 @@ export function Login() {
             );
 
             setAuthData(data);
-            sessionStorage.setItem("token", data.accessToken);
+            login(data.accessToken)
+
             sessionStorage.setItem("username", data.user.username);
             sessionStorage.setItem("name", data.user.name);
 

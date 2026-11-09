@@ -11,6 +11,7 @@ import { Login } from './routes/Login.tsx'
 import { Notas } from './routes/Notas.tsx'
 import { SignIn } from './routes/Signin.tsx'
 import { UserPage } from './routes/UserPage.tsx'
+import { AuthProvider } from './routes/components/AuthProviderComponent.tsx'
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider>
   </StrictMode>,
 )

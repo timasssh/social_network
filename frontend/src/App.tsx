@@ -3,10 +3,10 @@ import style from "./styles/App.module.css"
 import { Link } from "react-router-dom"
 import { LogoComponent } from "./routes/components/LogoComponent"
 import { UserLoggedDisplay } from "./routes/components/UserLoggedDisplayComponent";
+import { useAuth } from "./routes/components/AuthProviderComponent";
 
 function App() {
-  const userIsAuthentified = sessionStorage.getItem("token") !== null;
-  // TODO: create AuthContext
+  const { token } = useAuth();
 
   return (
     <>
@@ -15,7 +15,7 @@ function App() {
         <nav>
           <Link className={style.navLink} to="">Home</Link>
           <Link className={style.navLink} to="/notas">Notas</Link>
-          {userIsAuthentified 
+          {token 
             ? <UserLoggedDisplay />
             : <Link className={style.navLink} to="/login">Login</Link>}
         </nav>
