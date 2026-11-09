@@ -12,6 +12,7 @@ import { Notas } from './routes/Notas.tsx'
 import { SignIn } from './routes/Signin.tsx'
 import { UserPage } from './routes/UserPage.tsx'
 import { AuthProvider } from './routes/components/AuthProviderComponent.tsx'
+import { PersonalPage } from './routes/PersonalPage.tsx'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/user/:username",
         element: <UserPage />
+      },
+      {
+        path: "/me",
+        element: <PersonalPage />
       }
     ]
   }
