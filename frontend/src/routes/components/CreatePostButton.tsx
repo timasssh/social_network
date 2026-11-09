@@ -7,9 +7,11 @@ import type Post from "../types/Post";
 import { fetchNewPost } from "../services/PostService";
 import { LoadingComponent } from "./LoadingComponent";
 import { TemporaryMessageComponent } from "./TemporaryMessageComponent";
+import { useAuth } from "./AuthProviderComponent";
 
 export function CreatePostButton() {
-    if(!sessionStorage.getItem("token")) return null;
+    const { token } = useAuth();
+    if(!token) return null;
 
     const [menuIsHidden, setMenuIsHidden] = useState(true);
 
