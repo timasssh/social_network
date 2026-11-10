@@ -68,3 +68,16 @@ export async function fetchDislike(
         throw new Error(`Erro HTTP: ${response.status}`);
     }
 }
+export async function fetchPostsFromUser(
+    username: string
+) : Promise<Post[]> {
+    const response = await fetch(`/api/users/${username}/posts`);
+    
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+}

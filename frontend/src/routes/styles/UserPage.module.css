@@ -1,0 +1,10 @@
+.main {
+    display: grid;
+
+    align-content: flex-start;
+    max-width: 80vw;
+
+    place-self: center;
+
+    gap: 1rem;
+}

@@ -5,6 +5,7 @@ import { GoHeartFill, GoHeart } from "react-icons/go"
 import { useAuth } from "./AuthProviderComponent"
 import { TemporaryMessageComponent } from "./TemporaryMessageComponent"
 import { fetchDislike, fetchLike } from "../services/PostService"
+import { Link } from "react-router-dom"
 
 type postProps = {
     "title": string,
@@ -59,7 +60,7 @@ export function PostComponent(postProps: postProps) {
 
     return <article className={style.post + " simpleShadow"}>
         {error !== null && <TemporaryMessageComponent displayingSeconds={3} text={error} setVariableToNull={setError} />}
-        <p className={style.postAuthor}>@{postProps.author}</p>
+        <Link to={"/user/" + postProps.author} className={style.postAuthor}>@{postProps.author}</Link>
         <p className={style.postTitle}>{postProps.title}</p>
         <p>{postProps.message}</p>
         <div className={style.postInteractions}>

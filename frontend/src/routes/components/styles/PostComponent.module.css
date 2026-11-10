@@ -15,6 +15,15 @@
 .postAuthor {
     font-size: small;
     font-weight: 300;
+
+    color: #000;
+    text-decoration: none;
+
+    transition: 0.4s;
+}
+.postAuthor:hover {
+    text-decoration: underline;
+    color: #4949F9;
 }
 .likePostButton {
     cursor: pointer;

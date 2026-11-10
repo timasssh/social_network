@@ -9,7 +9,7 @@ form {
 
     padding: 3ch 3ch;
 }
-input {
+input, .defaultButton {
     border: none;
     background-color: #F9F9FF;
     outline: none;
@@ -22,7 +22,7 @@ input {
 input:focus {
     border: 1px dashed #4040F9;
 }
-input[type="submit"] {
+input[type="submit"], .defaultButton {
     place-self: end;
     height: min-content;
     width: 100%;
@@ -32,8 +32,10 @@ input[type="submit"] {
     font-family: Verdana, sans-serif;
     font-weight: bolder;
     font-size: large;
+
+    cursor: pointer;
 }
-input[type="submit"]:hover {
+input[type="submit"]:hover, .defaultButton:hover{
     background-color: #4949f9;
 }
 form textarea {

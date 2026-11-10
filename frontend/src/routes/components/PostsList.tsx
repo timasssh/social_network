@@ -5,9 +5,9 @@ import { LoadingComponent } from "./LoadingComponent";
 import type Post from "../types/Post";
 
 import style from "./styles/PostsList.module.css";
-import { fetchPosts } from "../services/PostService";
+import { fetchPosts, fetchPostsFromUser } from "../services/PostService";
 
-export function PostsList() {
+export function PostsList({username} : {username?: string}) {
     const [fetchLoading, setFetchLoading] = useState(true);
     const [posts, setPosts] = useState<Post[]>([]);
     const [error, setError] = useState<Error | null>(null);
@@ -24,7 +24,22 @@ export function PostsList() {
                 }
             }
         }
-        fetchData();
+        async function fetchDataFromUser(username: string) {
+            try {
+                const data = await fetchPostsFromUser(username);
+                setPosts(data);
+                setFetchLoading(false);
+            } catch (error) {
+                if (error instanceof Error) {
+                    setError(error);
+                }
+            }
+        }
+        if(username) {
+            fetchDataFromUser(username);
+        } else {
+            fetchData();
+        }
     }, []);
 
     if (error) {
