@@ -7,6 +7,10 @@ import { TemporaryMessageComponent } from "./TemporaryMessageComponent"
 import { fetchDislike, fetchLike } from "../services/PostService"
 import { Link } from "react-router-dom"
 
+import { HiDotsHorizontal } from "react-icons/hi"
+import { FaGem } from "react-icons/fa"
+import { BsTrashFill } from "react-icons/bs"
+
 type postProps = {
     "title": string,
     "message": string,
@@ -17,11 +21,15 @@ type postProps = {
 
 export function PostComponent(postProps: postProps) {
     const { token } = useAuth();
+
+    const username = sessionStorage.getItem("username");
     
     const [isLiked, setIsLiked] = useState(false);
     const [likesTotal, setLikesTotal] = useState(postProps.likes);
 
     const [error, setError] = useState<string | null>(null);
+
+    const [showPostOptionsMenu, setShowPostOptionsMenu] = useState(false);
 
     async function likePost() {
         if(!token){
@@ -58,16 +66,30 @@ export function PostComponent(postProps: postProps) {
         }
     }
 
+    async function deletePost() {
+        // TODO: fetch to API
+    }
+    async function editPostMessage() {
+        // TODO: fetch to API
+    }
+
     return <article className={style.post + " simpleShadow"}>
         {error !== null && <TemporaryMessageComponent displayingSeconds={3} text={error} setVariableToNull={setError} />}
-        <Link to={"/user/" + postProps.author} className={style.postAuthor}>@{postProps.author}</Link>
+        <section className={style.postActions} >
+            <Link to={"/user/" + postProps.author} className={style.postAuthor}>@{postProps.author}</Link>
+            {username === postProps.author && <HiDotsHorizontal className={style.postOptionsDisplayButton} onClick={() => setShowPostOptionsMenu(!showPostOptionsMenu)} />}
+            {showPostOptionsMenu && <section className={style.postOptionsMenu} >
+                <button className="defaultButton">excluir post<BsTrashFill /></button>
+                <button className="defaultButton">editar post<FaGem/></button>
+            </section>}
+        </section>
         <p className={style.postTitle}>{postProps.title}</p>
         <p>{postProps.message}</p>
-        <div className={style.postInteractions}>
+        <section className={style.postInteractions}>
             <span className={style.postInteractionInfo} 
             onClick={() => !token ? setError("Faça login para interagir com posts!") : isLiked ? dislikePost() : likePost()}>
                 {!isLiked ? <GoHeart className={style.likePostButton} /> : <GoHeartFill  className={style.likePostButton} />}{likesTotal}
             </span>
-        </div>
+        </section>
     </article>
 }

@@ -905,8 +905,8 @@ paths:
                 tokenType: "Bearer"
                 expiresIn: 3600
                 user:
-                  username: "usuario123"
-                  name: "Usuário"
+                  username: "timas"
+                  name: "Timas da Silva"
                   premium: false
         '400':
           description: Invalid request data
@@ -945,8 +945,8 @@ paths:
                 tokenType: "Bearer"
                 expiresIn: 3600
                 user:
-                  username: "usuario123"
-                  name: "Usuário"
+                  username: "timas"
+                  name: "Timas da Silva"
                   premium: false
         '400':
           description: Invalid request data or passwords do not match

@@ -12,7 +12,7 @@ export function UserLoggedDisplay() {
     }
 
     const username = sessionStorage.getItem("username");
-    const name = sessionStorage.getItem("username");
+    const name = sessionStorage.getItem("name");
     const photo = sessionStorage.getItem("photo");
 
     return <Link to={"/me"} className={style.userWrapper} >
