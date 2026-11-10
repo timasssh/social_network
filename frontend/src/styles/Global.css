@@ -9,8 +9,11 @@ form {
 
     padding: 3ch 3ch;
 }
-input, .defaultButton {
+.defaultButton {
     border: none;
+    transition: 0.3s;
+}
+input {
     background-color: #F9F9FF;
     outline: none;
     padding: 1ch;
