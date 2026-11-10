@@ -73,6 +73,8 @@ export function SignIn() {
 
             sessionStorage.setItem("username", data.user.username);
             sessionStorage.setItem("name", data.user.name);
+            sessionStorage.setItem("premium", `${data.user.premium}`);
+            sessionStorage.setItem("premium2", JSON.stringify(data.user.premium));
 
             setUsername("");
             setEmail("");
@@ -87,8 +89,6 @@ export function SignIn() {
             } else {
                 setFetchError("Ocorreu um erro inesperado.");
             }
-        } finally {
-            console.log(authData);
         }
     }
 

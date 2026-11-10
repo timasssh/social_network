@@ -907,7 +907,7 @@ paths:
                 user:
                   username: "timas"
                   name: "Timas da Silva"
-                  premium: false
+                  premium: true
         '400':
           description: Invalid request data
         '401':

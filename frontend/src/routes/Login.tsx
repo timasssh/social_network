@@ -62,6 +62,7 @@ export function Login() {
 
             sessionStorage.setItem("username", data.user.username);
             sessionStorage.setItem("name", data.user.name);
+            sessionStorage.setItem("premium", `${data.user.premium}`);
 
             setIdentifier("");
             setPassword("");
@@ -75,8 +76,6 @@ export function Login() {
             } else {
                 setFetchError("Ocorreu um erro inesperado.");
             }
-        } finally {
-            console.log(authData);
         }
     }
 

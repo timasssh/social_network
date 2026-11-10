@@ -22,6 +22,7 @@ type postProps = {
 export function PostComponent(postProps: postProps) {
     const { token } = useAuth();
     const username = sessionStorage.getItem("username");
+    const isPremiumUser = sessionStorage.getItem("premium");
     
     const [displayPost, setDisplayPost] = useState(true);
     
@@ -70,6 +71,15 @@ export function PostComponent(postProps: postProps) {
         setShowPostOptionsMenu(!showPostOptionsMenu)
 
         setTimeout(() => setShowPostOptionsMenu(false), 2500);            
+    }
+    function handleEditPostClick() {
+        console.log(isPremiumUser);
+        if(isPremiumUser == "true") {
+            setShowEditPostMessageMenu(true);
+            return;
+        }
+
+        setError(new Error("Seja premium para editar seus pots!"));
     }
     
     async function deletePost() {
@@ -123,7 +133,7 @@ export function PostComponent(postProps: postProps) {
             {username === postProps.author && <HiDotsHorizontal className={style.postOptionsDisplayButton} onClick={() => handleMenuOptionsClick()} />}
             {showPostOptionsMenu && <section className={style.postOptionsMenu} >
                 <button onClick={deletePost} className="defaultButton">excluir post<BsTrashFill /></button>
-                <button onClick={() => setShowEditPostMessageMenu(true)} className="defaultButton">editar post<FaGem/></button>
+                <button onClick={handleEditPostClick} className="defaultButton">editar post<FaGem/></button>
             </section>}
         </section>
         <p className={style.postTitle}>{postProps.title}</p>
