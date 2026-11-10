@@ -42,6 +42,8 @@ export async function fetchLike(
     postId: number,
     token: string
 ): Promise<void> {
+    if(!token) throw new Error("Invalid session token :(");
+    
     const response = await fetch(`/api/posts/${postId}/like`, {
         method: "POST",
         headers: {
@@ -57,6 +59,8 @@ export async function fetchDislike(
     postId: number,
     token: string
 ): Promise<void> {
+    if(!token) throw new Error("Invalid session token :(");
+    
     const response = await fetch(`/api/posts/${postId}/like`, {
         method: "DELETE",
         headers: {
@@ -80,4 +84,22 @@ export async function fetchPostsFromUser(
     const data = await response.json();
 
     return data;
+}
+export async function fetchExludePost(
+    postId: number,
+    token: string
+): Promise<void> {
+    if(!token) throw new Error("Invalid session token :(");
+    
+    const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    console.log(response);
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
 }
