@@ -6,7 +6,7 @@ import { LoadingComponent } from "./components/LoadingComponent";
 import { fetchUser } from "./services/UserService";
 import { UserProfileComponent } from "./components/UserProfileComponent";
 
-import style from "./styles/UserPage.module.css"
+import style from "./styles/UserPage_personalPage.module.css"
 import { PostsList } from "./components/PostsList";
 
 export function UserPage() {
