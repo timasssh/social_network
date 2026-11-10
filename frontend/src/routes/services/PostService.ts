@@ -103,3 +103,26 @@ export async function fetchExludePost(
         throw new Error(`Erro HTTP: ${response.status}`);
     }
 }
+export async function fetchEditPostMessage(
+    postId: number,
+    message: string,
+    token: string | null
+): Promise<void> {
+    if(!token) throw new Error("Invalid session token :(");
+
+    const response = await fetch(`/api/posts/${postId}`, {
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            message
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+}
