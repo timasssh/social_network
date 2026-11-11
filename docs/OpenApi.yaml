@@ -929,6 +929,7 @@ paths:
             schema:
               $ref: '#/components/schemas/RegisterRequest'
             example:
+              name: "Usuário 123 Sobrenome"
               username: "usuario123"
               email: "usuario@email.com"
               password: "senha123"
@@ -1091,11 +1092,15 @@ components:
     RegisterRequest:
       type: object
       required:
+        - name
         - username
         - email
         - password
         - passwordConfirmation
       properties:
+        name:
+          type: string
+          example: "Usuário 123 Sobrenome"
         username:
           type: string
           example: "usuario123"

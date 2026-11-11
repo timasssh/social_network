@@ -11,13 +11,15 @@ export function SignIn() {
     
     const [identified, setIdentified] = useState(false);
 
+    const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-    const [errors, setErrors] = useState<{usernameError : string | null, emailError : string | null, passwordError: string | null, passwordConfirmationError: string | null}>(
+    const [errors, setErrors] = useState<{nameError: string | null, usernameError : string | null, emailError : string | null, passwordError: string | null, passwordConfirmationError: string | null}>(
         {
+            nameError: null,
             usernameError: null,
             emailError: null,
             passwordError: null,
@@ -30,7 +32,7 @@ export function SignIn() {
     const [authData, setAuthData] = useState<Authentication>();
 
     function clearErrors() {
-        setErrors({usernameError: null, emailError: null, passwordError: null, passwordConfirmationError: null});
+        setErrors({nameError: null, usernameError: null, emailError: null, passwordError: null, passwordConfirmationError: null});
         setFetchError(null);
     }
 
@@ -44,9 +46,14 @@ export function SignIn() {
         const maxPasswordLength = 127;
         const maxIdentifierLength = 127;
 
+        setName(name.trim());
         setUsername(username.trim());
         setEmail(email.trim());
 
+        if(name.length === 0 || name.length > maxIdentifierLength) {
+            setErrors(current => ({...current, nameError: "Digite um nome válido!"}));
+            return;
+        }
         if(username.length === 0 || username.length > maxIdentifierLength) {
             setErrors(current => ({...current, usernameError: "Digite um username válido!"}));
             return;
@@ -66,7 +73,7 @@ export function SignIn() {
 
         // TODO: fetch to API
         try {
-            const data = await fetchSignin(username, email, password, passwordConfirmation);
+            const data = await fetchSignin(name, username, email, password, passwordConfirmation);
 
             setAuthData(data);
             login(data.accessToken);
@@ -97,6 +104,11 @@ export function SignIn() {
         {fetchError !== null && <TemporaryMessageComponent text={"Error: " + fetchError} displayingSeconds={3} />}
         <h1>Cadastro</h1>
         <form method="post" onSubmit={handleSubmit}>
+            <label htmlFor="nameInput">Digite seu nome: </label>
+            <section>
+                <input onInput={(event) => setName(event.currentTarget.value)} type="text" name="name" id="nameInput"/>
+                <span className="errorMessage">{errors.nameError}</span>
+            </section>
             <label htmlFor="usernameInput">Digite seu nome de usuário: </label>
             <section>
                 <input onInput={(event) => setUsername(event.currentTarget.value)} type="text" name="username" id="usernameInput"/>

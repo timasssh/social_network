@@ -27,6 +27,7 @@ export async function fetchLogin(
 }
 
 export async function fetchSignin(
+    name: string,
     username: string,
     email: string,
     password: string,
@@ -39,6 +40,7 @@ export async function fetchSignin(
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+            name,
             username,
             email,
             password,
