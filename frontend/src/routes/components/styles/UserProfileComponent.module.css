@@ -61,6 +61,7 @@
 
     height: min-content;
     padding: 1rem;
+    gap: 0.5rem;
 
     display: flex;
     flex-direction: column;

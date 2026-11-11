@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "./components/AuthProviderComponent";
 import { ErrorComponent } from "./components/ErrorComponent";
 import { PostsList } from "./components/PostsList";
-import { fetchLoggedUserData, fetchUser } from "./services/UserService";
+import { fetchLoggedUserData } from "./services/UserService";
 import { LoadingComponent } from "./components/LoadingComponent";
 import { UserProfileComponent } from "./components/UserProfileComponent";
 import type User from "./types/User";

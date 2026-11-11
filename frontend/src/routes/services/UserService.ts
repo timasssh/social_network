@@ -44,3 +44,27 @@ export async function fetchLoggedUserData(
 
     return data;
 }
+export async function fetchEditProfile(
+    name: string,
+    username: string,
+    token: string
+): Promise<void> {
+    if(!token) throw new Error("Invalid session token :(");
+
+    const response = await fetch(`/api/me`, {
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            name,
+            username
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+}
