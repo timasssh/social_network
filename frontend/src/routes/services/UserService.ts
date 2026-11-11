@@ -24,3 +24,23 @@ export async function fetchUser(
 
     return data;
 }
+export async function fetchLoggedUserData(
+    token: string
+): Promise<User> {
+    if(!token) throw new Error("Invalid session token :(");
+
+    const response = await fetch("/api/me", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+}

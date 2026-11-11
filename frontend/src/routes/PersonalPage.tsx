@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "./components/AuthProviderComponent";
 import { ErrorComponent } from "./components/ErrorComponent";
 import { PostsList } from "./components/PostsList";
-import { fetchUser } from "./services/UserService";
+import { fetchLoggedUserData, fetchUser } from "./services/UserService";
 import { LoadingComponent } from "./components/LoadingComponent";
 import { UserProfileComponent } from "./components/UserProfileComponent";
 import type User from "./types/User";
@@ -21,8 +21,8 @@ export function PersonalPage() {
     useEffect(() => {
         async function getUserData () {
             try {
-                if(!username) throw new Error("Error when fetching user data");
-                const data = await fetchUser(username);
+                if(!token) throw new Error("Error when fetching user data");
+                const data = await fetchLoggedUserData(token);
 
                 setUserData(data)
             } catch (error) {
