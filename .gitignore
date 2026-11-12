@@ -79,3 +79,11 @@ dist-ssr/
 
 .DS_Store
 Thumbs.db
+
+# ==========================================
+# DOCKER / ENVIRONMENT VARIABLES
+# ==========================================
+
+/.env
+/.env.*
+!/.env.example
