@@ -22,6 +22,9 @@ O projeto tem como objetivo explorar conceitos e tecnologias utilizados no desen
 **Database**
 - PostgreSQL
 
+**Setup**
+- Docker
+
 ## Objetivo
 
 Este projeto foi desenvolvido exclusivamente para **estudo, demonstração de conhecimentos e composição de portfólio**.
