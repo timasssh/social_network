@@ -32,6 +32,121 @@ A aplicação não possui finalidade comercial.
 
 Atualmente o projeto está usando um servidor local de Mock Api usando prism ``@stoplight/prism-cli``, e o contrato da Api está sendo desenvolvido no arquivo ``OpenApi.yaml``.
 
+## Configuração do ambiente de desenvolvimento
+
+### 1. Pré-requisitos
+
+Antes de iniciar, certifique-se de que o computador possui:
+
+- Git;
+- Docker Engine;
+- Docker Compose (plugin);
+- Java 21 (JDK);
+- IntelliJ IDEA (opcional, para desenvolvimento).
+
+### 2. Clonando o repositório
+
+Clone o projeto e acesse sua pasta:
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd <NOME_DO_REPOSITORIO>
+```
+
+### 3. Configurando as variáveis de ambiente
+
+Crie o arquivo `.env` a partir do modelo disponibilizado:
+
+```bash
+cp .env.example .env
+```
+
+Edite o arquivo e configure as senhas de acesso ao PostgreSQL:
+
+```bash
+nano .env
+```
+
+### 4. Preparando o PostgreSQL
+
+Conceda permissão de execução ao script de inicialização:
+
+```bash
+chmod +x docker/postgres/init/01-create-app-user.sh
+```
+
+Verifique se a configuração do Docker Compose está correta:
+
+```bash
+docker compose config
+```
+
+Inicie o container do PostgreSQL:
+
+```bash
+docker compose up -d
+```
+
+Verifique se o container está funcionando:
+
+```bash
+docker compose ps
+```
+
+Para acompanhar os logs:
+
+```bash
+docker compose logs -f database
+```
+
+### 5. Configurando o backend
+
+Abra o projeto `backend` no IntelliJ IDEA.
+
+Crie o arquivo `src/main/resources/application-local.yml`, utilizando como referência as configurações documentadas no projeto.
+
+Configure as credenciais do PostgreSQL de acordo com o arquivo `.env`.
+Atenção: o arquivo `application-local.yml` não deve ser enviado ao GitHub.
+
+### 6. Executando a aplicação
+
+No IntelliJ IDEA, execute a classe principal do Spring Boot.
+Alternativamente, pelo terminal, acesse a pasta do backend:
+
+```bash
+cd backend
+```
+
+Conceda permissão de execução ao Gradle Wrapper:
+
+```bash
+chmod +x gradlew
+```
+
+Execute a aplicação:
+
+```bash
+./gradlew bootRun
+```
+
+O backend estará disponível em:
+
+```text
+http://localhost:8080
+```
+
+### 7. Encerrando o ambiente
+
+Para parar e remover o container do PostgreSQL:
+
+```bash
+docker compose down
+```
+
+Os dados do banco permanecem armazenados no volume Docker e estarão disponíveis na próxima inicialização.
+
+**Importante:** não utilize `docker compose down -v` caso queira preservar os dados do banco.
+
 ## Direitos autorais
 
 © 2026 Timas. Todos os direitos reservados.
