@@ -36,7 +36,7 @@ public class AuthController {
 //        TODO: implements verification: identifier is user's username or email?
 
         User user = repository.findByEmail(body.identifier()).orElseThrow(() -> new RuntimeException("Inválid login provided data!"));
-        if(passwordEncoder.matches(user.getPassword(), body.password())) {
+        if(passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = this.tokenService.generateToken(user);
 
             ResponseUserDTO userDTO = new ResponseUserDTO(user.getUsername(), user.getName(), user.isPremium(), user.getFollowers());
