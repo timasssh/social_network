@@ -105,7 +105,7 @@ export async function fetchExludePost(
 }
 export async function fetchEditPostMessage(
     postId: number,
-    message: string,
+    newMessage: string,
     token: string | null
 ): Promise<void> {
     if(!token) throw new Error("Invalid session token :(");
@@ -118,7 +118,7 @@ export async function fetchEditPostMessage(
             "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            message
+            newMessage
         })
     });
 
