@@ -1,4 +1,4 @@
 package com.example.backend.dto;
 
-public class UserEditRequestDTO {
+public record UserEditRequestDTO(String username, String name) {
 }

@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.ResponseUserDTO;
+import com.example.backend.dto.UserEditRequestDTO;
 import com.example.backend.entity.Post;
 import com.example.backend.entity.User;
 import com.example.backend.exception.PermissionDeniedException;
@@ -51,7 +52,25 @@ public class UserService {
         try {
             User userToDelete = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Something went wrong!"));
 
+            List<Post> postsToDelete = selectAllPostsFromUser(userToDelete.getUsername());
+            for(Post currentPost : postsToDelete) {
+                postRepository.delete(currentPost);
+            }
+
             userRepository.delete(userToDelete);
+        } catch (Exception exception) {
+            throw exception;
+        }
+    }
+    public void editUser(@NonNull String email, UserEditRequestDTO userEditRequestDTO) {
+        if (email.isBlank()) throw new PermissionDeniedException("Permission denied!");
+        try {
+            User userToEdit = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Something went wrong!"));
+
+            userToEdit.setUsername(userEditRequestDTO.username());
+            userToEdit.setName(userEditRequestDTO.name());
+
+            userRepository.save(userToEdit);
         } catch (Exception exception) {
             throw exception;
         }

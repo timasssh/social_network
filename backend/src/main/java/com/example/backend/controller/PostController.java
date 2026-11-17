@@ -7,6 +7,7 @@ import com.example.backend.entity.Post;
 import com.example.backend.entity.User;
 import com.example.backend.exception.PermissionDeniedException;
 import com.example.backend.service.PostService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,7 @@ public class PostController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     public ResponseEntity createPost(@AuthenticationPrincipal User user, @RequestBody PostRequestDTO postRequestDTO) {
         try {
@@ -53,6 +55,7 @@ public class PostController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PatchMapping("/{id}")
     public ResponseEntity updatePost(@AuthenticationPrincipal User user, @RequestBody PostEditRequestDTO postEditRequestDTO, @PathVariable Long id) {
         try {
@@ -66,6 +69,7 @@ public class PostController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     public ResponseEntity deletePost(@AuthenticationPrincipal User user, @PathVariable Long id) {
         try {
