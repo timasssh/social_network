@@ -153,6 +153,11 @@ O backend estará disponível em:
 http://localhost:8080
 ```
 
+Para conectar o terminal ao container docker do Postgre:
+```bash
+docker exec -it [name of the docker container] psql -U [name of the database user] -d [name of the database]
+```
+
 ### 7. Encerrando o ambiente
 
 Para parar e remover o container do PostgreSQL:
