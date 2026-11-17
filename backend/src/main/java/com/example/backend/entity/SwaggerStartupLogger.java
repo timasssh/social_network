@@ -13,14 +13,14 @@ public class SwaggerStartupLogger {
     @Value("${server.servlet.context-path:}")
     private String contextPath;
 
-    @Value("${springdoc.swagger-ui.path:/swagger-ui.html}")
-    private String swaggerPath;
-
     @EventListener(ApplicationReadyEvent.class)
     public void logSwaggerUrl() {
-        String formattedSwaggerPath = swaggerPath.startsWith("/") ? swaggerPath : "/" + swaggerPath;
+        String url = String.format(
+                "http://localhost:%s%s/swagger-ui/index.html",
+                serverPort,
+                contextPath
+        );
 
-        String url = String.format("http://localhost:%s%s%s", serverPort, contextPath, formattedSwaggerPath);
         System.out.println("\n=============================================");
         System.out.println("\tSwagger UI disponível em: " + url);
         System.out.println("=============================================");
