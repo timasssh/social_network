@@ -84,7 +84,7 @@ public class UserService {
         if (userRepository.findByUsername(username).isEmpty()) throw new UsernameNotFoundException("User not found!");
 
         try {
-            List<Post> posts = postRepository.findAllByAuthor(username);
+            List<Post> posts = postRepository.findAllByAuthor_Username(username);
             List<ResponsePostDTO> response = new ArrayList<>();
 
             for(Post currentPost : posts) {
