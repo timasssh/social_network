@@ -5,14 +5,12 @@ import { ErrorComponent } from "./ErrorComponent";
 import { useAuth } from "./AuthProviderComponent";
 
 export function UserLoggedDisplay() {
-    const { token } = useAuth();
+    const { token, name, username } = useAuth();
     
     if(!token) {
         return <ErrorComponent error={new Error("Usuário não encontrado!")} errorTitle="Algo deu errado enquanto buscava usuário :(" />
     }
 
-    const username = sessionStorage.getItem("username");
-    const name = sessionStorage.getItem("name");
     const photo = sessionStorage.getItem("photo");
 
     return <Link to={"/me"} className={style.userWrapper} >

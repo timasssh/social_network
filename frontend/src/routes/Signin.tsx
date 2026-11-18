@@ -7,7 +7,7 @@ import { TemporaryMessageComponent } from "./components/TemporaryMessageComponen
 import { useAuth } from "./components/AuthProviderComponent";
 
 export function SignIn() {
-    const { login } = useAuth();
+    const { login, saveDataAtStorage } = useAuth();
     
     const [identified, setIdentified] = useState(false);
 
@@ -71,15 +71,12 @@ export function SignIn() {
             return;
         }
 
-        // TODO: fetch to API
         try {
             const data = await fetchSignin(name, username, email, password, passwordConfirmation);
 
             setAuthData(data);
             login(data.accessToken);
 
-            sessionStorage.setItem("username", data.user.username);
-            sessionStorage.setItem("name", data.user.name);
             sessionStorage.setItem("premium", `${data.user.premium}`);
             sessionStorage.setItem("premium2", JSON.stringify(data.user.premium));
 

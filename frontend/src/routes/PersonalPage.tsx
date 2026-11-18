@@ -10,9 +10,7 @@ import type User from "./types/User";
 import style from "./styles/UserPage_personalPage.module.css"
 
 export function PersonalPage() {
-    const { token } = useAuth();
-    const username = sessionStorage.getItem("username");
-    const name = sessionStorage.getItem("name");
+    const { token, username, name } = useAuth();
     if(!token || !username || !name) return <ErrorComponent error={new Error("Authentication error")} errorTitle="Algo deu errado enquanto caregava informações do usuário :(" />
 
     const [userData, setUserData] = useState<User | null>(null);

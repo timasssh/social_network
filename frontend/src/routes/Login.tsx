@@ -8,7 +8,7 @@ import { TemporaryMessageComponent } from "./components/TemporaryMessageComponen
 import { useAuth } from "./components/AuthProviderComponent";
 
 export function Login() {
-    const { login } = useAuth();
+    const { login, saveDataAtStorage } = useAuth();
     
     const [identified, setIdentified] = useState(false);
 
@@ -59,9 +59,8 @@ export function Login() {
 
             setAuthData(data);
             login(data.accessToken)
+            saveDataAtStorage(data.user.name, data.user.username);
 
-            sessionStorage.setItem("username", data.user.username);
-            sessionStorage.setItem("name", data.user.name);
             sessionStorage.setItem("premium", `${data.user.premium}`);
 
             setIdentifier("");

@@ -19,7 +19,7 @@ type userProfileProps = {
 
 export function UserProfileComponent(props: userProfileProps) {
     const navigate = useNavigate();
-    const { token, logout } = useAuth();
+    const { token, logout, saveDataAtStorage } = useAuth();
     if(!token) return <ErrorComponent errorTitle="Algo deu errado enquanto verificava a sessão do usuário :(" error={new Error("Sessão de usuário inválida!")} />
     
     const [editingProfile, setEditingProfile] = useState(false);
@@ -60,6 +60,8 @@ export function UserProfileComponent(props: userProfileProps) {
 
             setEditingProfile(false);
             setSuccess("Perfil editado com sucesso!");
+
+            saveDataAtStorage(currentName, currentUsername)
         } catch(error) {
             if(error instanceof Error) {
                 setError(error);
@@ -78,8 +80,6 @@ export function UserProfileComponent(props: userProfileProps) {
             setSuccess("A sua conta foi excluída com sucesso!");
             setLoggingOut(true);
             setEditingProfile(false);
-
-            sessionStorage.clear();
         } catch (error) {
             setError(new Error(error instanceof Error ? error.message : "Erro inesperado!"));
         }
