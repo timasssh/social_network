@@ -25,7 +25,7 @@ public class PostController {
     @GetMapping
     public ResponseEntity getAllPosts() {
         try {
-            List<Post> postList = postService.selectAllPosts();
+            List<ResponsePostDTO> postList = postService.selectAllPosts();
 
             return ResponseEntity.ok(postList);
         } catch (Exception exception) {
@@ -35,7 +35,7 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity getPost(@PathVariable Long id) {
         try {
-            Post post = postService.selectPostById(id);
+            ResponsePostDTO post = postService.selectPostById(id);
 
             return ResponseEntity.ok(post);
         } catch (Exception exception) {

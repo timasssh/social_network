@@ -1,15 +1,14 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.ResponsePostDTO;
 import com.example.backend.dto.ResponseUserDTO;
 import com.example.backend.dto.UserEditRequestDTO;
-import com.example.backend.entity.Post;
 import com.example.backend.entity.User;
 import com.example.backend.exception.PermissionDeniedException;
 import com.example.backend.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -48,7 +47,7 @@ public class UserController {
     @GetMapping("/users/{username}/posts")
     public ResponseEntity getAllPostsFromUser(@PathVariable String username) {
         try {
-            List<Post> usersPost = userService.selectAllPostsFromUser(username);
+            List<ResponsePostDTO> usersPost = userService.selectAllPostsFromUser(username);
 
             return ResponseEntity.ok(usersPost);
         } catch (UsernameNotFoundException exception) {

@@ -10,26 +10,35 @@ import com.example.backend.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
 
-    public Post selectPostById(Long id) throws RuntimeException{
-        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found!"));
+    public ResponsePostDTO selectPostById(Long id) throws RuntimeException{
+        return convertPostToDTO(
+                postRepository.findById(id).orElseThrow(
+                        () -> new RuntimeException("Post not found!")
+                )
+        );
     }
-    public List<Post> selectAllPosts() {
-        return postRepository.findAll();
+    public List<ResponsePostDTO> selectAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        List<ResponsePostDTO> response = new ArrayList<>();
+
+        for(Post currentPost : posts) {
+            response.add(convertPostToDTO(currentPost));
+        }
+
+        return response;
     }
     public ResponsePostDTO savePost(PostRequestDTO postRequestDTO, @NonNull User user) throws Exception {
-        Post newPost = convertDTOToPost(postRequestDTO, user.getUsername());
+        Post newPost = convertDTOToPost(postRequestDTO, user);
 
         try {
             postRepository.save(newPost);
@@ -42,7 +51,7 @@ public class PostService {
     public Post editPostMessage(PostEditRequestDTO postEditRequestDTO, Long id, String author) throws Exception { // TODO: fazer verificação de autoria do post pelo ID e não pelo campo username
         Post postToEdit = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found!"));
 
-        if (!postToEdit.getAuthor().equals(author)){
+        if (!postToEdit.getAuthor().getUsername().equals(author)){
             throw new PermissionDeniedException("Permission to edit post denied");
         }
 
@@ -58,7 +67,7 @@ public class PostService {
     public void deletePost(Long id, String author) throws Exception {
         Post postToDelete = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found!"));
 
-        if (!postToDelete.getAuthor().equals(author)){
+        if (!postToDelete.getAuthor().getUsername().equals(author)){
             throw new PermissionDeniedException("Permission to delete post denied");
         }
 
@@ -69,7 +78,7 @@ public class PostService {
         }
     }
 
-    private @NonNull Post convertDTOToPost(@NonNull PostRequestDTO postRequestDTO, String postAuthor) {
+    public static @NonNull Post convertDTOToPost(@NonNull PostRequestDTO postRequestDTO, User postAuthor) {
         Post newPost = new Post();
 
         newPost.setTitle(postRequestDTO.title());
@@ -79,7 +88,10 @@ public class PostService {
 
         return newPost;
     }
-    private @NonNull ResponsePostDTO convertPostToDTO(@NonNull Post postToConvert) {
-        return new ResponsePostDTO(postToConvert.getId(), postToConvert.getTitle(), postToConvert.getMessage(), postToConvert.getAuthor(), postToConvert.getLikes());
+    public static @NonNull ResponsePostDTO convertPostToDTO(@NonNull Post postToConvert) {
+        return new ResponsePostDTO(postToConvert.getId(), postToConvert.getTitle(), postToConvert.getMessage(), postToConvert.getAuthor().getUsername(), postToConvert.getLikes());
+    }
+    public @NonNull Post getPostFromResponsePostDTO(@NonNull ResponsePostDTO responsePostDTO) {
+        return postRepository.findById(responsePostDTO.id()).orElseThrow(() -> new RuntimeException("Post not found!"));
     }
 }

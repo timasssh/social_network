@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.ResponsePostDTO;
 import com.example.backend.dto.ResponseUserDTO;
 import com.example.backend.dto.UserEditRequestDTO;
 import com.example.backend.entity.Post;
@@ -21,6 +22,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private PostService postService;
 
     public List<ResponseUserDTO> selectAllUsers() {
         try {
@@ -52,9 +55,9 @@ public class UserService {
         try {
             User userToDelete = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Something went wrong!"));
 
-            List<Post> postsToDelete = selectAllPostsFromUser(userToDelete.getUsername());
-            for(Post currentPost : postsToDelete) {
-                postRepository.delete(currentPost);
+            List<ResponsePostDTO> postsToDelete = selectAllPostsFromUser(userToDelete.getUsername());
+            for(ResponsePostDTO currentPost : postsToDelete) {
+                postRepository.delete(postService.getPostFromResponsePostDTO(currentPost));
             }
 
             userRepository.delete(userToDelete);
@@ -76,18 +79,25 @@ public class UserService {
         }
     }
 
-    public List<Post> selectAllPostsFromUser(@NonNull String username) {
+    public List<ResponsePostDTO> selectAllPostsFromUser(@NonNull String username) {
         if (username.isBlank()) throw new RuntimeException("Something went wrond!");
         if (userRepository.findByUsername(username).isEmpty()) throw new UsernameNotFoundException("User not found!");
 
         try {
-            return postRepository.findAllByAuthor(username);
+            List<Post> posts = postRepository.findAllByAuthor(username);
+            List<ResponsePostDTO> response = new ArrayList<>();
+
+            for(Post currentPost : posts) {
+                response.add(PostService.convertPostToDTO(currentPost));
+            }
+
+            return response;
         } catch (Exception exception) {
             throw exception;
         }
     }
 
-    public @NonNull ResponseUserDTO convertUserToDTO(@NonNull User user) {
+    public static @NonNull ResponseUserDTO convertUserToDTO(@NonNull User user) {
         return new ResponseUserDTO(user.getUsername(), user.getName(), user.isPremium(), user.getFollowers());
     }
 }
