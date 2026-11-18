@@ -1,4 +1,4 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import type User from "../types/User"
 
 import style from "./styles/UserProfileComponent.module.css"
@@ -33,7 +33,6 @@ export function UserProfileComponent(props: userProfileProps) {
     const [success, setSuccess] = useState<string | null>(null);
     const [redirect, setRedirect] = useState<string | undefined>(undefined);
 
-    // TODO: fetch api to update profile
     async function handleEditProfile() {
         const maxIdentifierLength = 127;
         
@@ -74,6 +73,9 @@ export function UserProfileComponent(props: userProfileProps) {
 
             setRedirect("/");
             setSuccess("A sua conta foi excluída com sucesso!");
+            setEditingProfile(false);
+
+            sessionStorage.clear();
         } catch (error) {
             setError(new Error(error instanceof Error ? error.message : "Erro inesperado!"));
         }
@@ -119,7 +121,7 @@ export function UserProfileComponent(props: userProfileProps) {
 
     return <>
         <article className={style.profileWrapper} >
-            {success && <TemporaryMessageComponent text={success} displayingSeconds={3} setVariableToNull={setSuccess} redirectionLink={redirect} />}
+            {success && <TemporaryMessageComponent text={success} displayingSeconds={3} setVariableToNull={setSuccess} redirectionLink={redirect} logOutAfterMessgae={true} />}
             <img className={style.userBanner} src="/background_texture_banner_image.jpg" alt="user banner image" />
             <section className={style.userWrapper} >
                 <img className={style.userPhoto} src="/user_photo_icon.svg" alt="user photo image" />

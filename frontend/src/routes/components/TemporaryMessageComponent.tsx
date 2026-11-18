@@ -4,17 +4,21 @@ import { LoadingComponent } from "./LoadingComponent";
 import style from "./styles/TemporaryMessageComponent.module.css"
 import { GoX } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthProviderComponent";
 
 type temporaryMessageProps = {
     text: string;
     displayingSeconds: number;
     redirectionLink?: string;
     setVariableToNull?: (value: null | any) => void;
+    logOutAfterMessgae?: boolean
 }
 
 export function TemporaryMessageComponent(props: temporaryMessageProps) {
     const [visible, setVisible] = useState(true);
     const navigate = useNavigate();
+
+    const { logout } = useAuth();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -24,6 +28,9 @@ export function TemporaryMessageComponent(props: temporaryMessageProps) {
             }
             if(props.setVariableToNull) {
                 props.setVariableToNull(null);
+            }
+            if(props.logOutAfterMessgae) {
+                logout();
             }
         }, props.displayingSeconds * 1000);
 
