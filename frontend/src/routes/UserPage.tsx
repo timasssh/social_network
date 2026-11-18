@@ -33,8 +33,6 @@ export function UserPage() {
                 if(error instanceof Error) {
                     setUserDataError(error);
                 }
-            } finally {
-                console.log(userData);
             }
         }
         getUserData();

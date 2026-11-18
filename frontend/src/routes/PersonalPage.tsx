@@ -29,8 +29,6 @@ export function PersonalPage() {
                 if(error instanceof Error) {
                     setUserDataError(error);
                 }
-            } finally {
-                console.log(userData);
             }
         }
         getUserData();

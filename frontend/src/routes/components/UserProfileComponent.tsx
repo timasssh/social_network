@@ -10,6 +10,7 @@ import { useAuth } from "./AuthProviderComponent"
 import { ErrorComponent } from "./ErrorComponent"
 import { BsTrashFill } from "react-icons/bs"
 import { GoX } from "react-icons/go"
+import { useNavigate } from "react-router-dom"
 
 type userProfileProps = {
     user: User,
@@ -17,7 +18,8 @@ type userProfileProps = {
 }
 
 export function UserProfileComponent(props: userProfileProps) {
-    const { token } = useAuth();
+    const navigate = useNavigate();
+    const { token, logout } = useAuth();
     if(!token) return <ErrorComponent errorTitle="Algo deu errado enquanto verificava a sessão do usuário :(" error={new Error("Sessão de usuário inválida!")} />
     
     const [editingProfile, setEditingProfile] = useState(false);
@@ -81,6 +83,11 @@ export function UserProfileComponent(props: userProfileProps) {
         }
     }
 
+    function handleLogOut() {
+        navigate("/");
+        logout();
+    }
+
     if(editingProfile) return <>
         <article className={style.profileWrapper} >
             <img className={style.userBanner} src="/background_texture_banner_image.jpg" alt="user banner image" />
@@ -132,8 +139,11 @@ export function UserProfileComponent(props: userProfileProps) {
                 </section>
                 <section className={style.actions} >
                     {props.owner
-                        ? <button onClick={() => setEditingProfile(true)} style={{padding: "0.5rem 3rem"}} className="defaultButton">editar perfil</button>
-                        : <button style={{padding: "0.5rem 3rem"}} className="defaultButton">seguir</button>
+                        ? <>
+                            <button onClick={() => setEditingProfile(true)} className={"defaultButton " + style.actionButton}>editar perfil</button>
+                            <button onClick={handleLogOut} className={"defaultButton " + style.actionButton}>Sair</button>
+                        </>
+                        : <button className={"defaultButton " + style.actionButton}>seguir</button>
                     }
                     <p>{props.user.followers} followers</p>
                 </section>
