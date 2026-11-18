@@ -34,6 +34,7 @@ export function UserProfileComponent(props: userProfileProps) {
     const [error, setError] = useState<Error | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [redirect, setRedirect] = useState<string | undefined>(undefined);
+    const [loggingOut, setLoggingOut] = useState(false);
 
     async function handleEditProfile() {
         const maxIdentifierLength = 127;
@@ -75,6 +76,7 @@ export function UserProfileComponent(props: userProfileProps) {
 
             setRedirect("/");
             setSuccess("A sua conta foi excluída com sucesso!");
+            setLoggingOut(true);
             setEditingProfile(false);
 
             sessionStorage.clear();
@@ -128,7 +130,7 @@ export function UserProfileComponent(props: userProfileProps) {
 
     return <>
         <article className={style.profileWrapper} >
-            {success && <TemporaryMessageComponent text={success} displayingSeconds={3} setVariableToNull={setSuccess} redirectionLink={redirect} logOutAfterMessgae={true} />}
+            {success && <TemporaryMessageComponent text={success} displayingSeconds={3} setVariableToNull={setSuccess} redirectionLink={redirect} logOutAfterMessgae={loggingOut} />}
             <img className={style.userBanner} src="/background_texture_banner_image.jpg" alt="user banner image" />
             <section className={style.userWrapper} >
                 <img className={style.userPhoto} src="/user_photo_icon.svg" alt="user photo image" />
