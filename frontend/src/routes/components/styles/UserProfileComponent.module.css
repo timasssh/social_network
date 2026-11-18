@@ -97,3 +97,24 @@
     align-items: center;
     justify-content: center;
 }
+
+.actionButton {
+    padding: 0.5rem 3rem
+}
+.deleteAccountButton {
+    background-color: #D54549;
+    color: #FFF;
+}
+
+.deleteProfileMenu {
+    background-color: #F9F9F9;
+    min-height: 16rem;
+    padding: 3rem 1rem;
+
+    display: grid;
+    justify-content: center;
+}
+.deleteProfileMenu section {
+    display: flex;
+    gap: 1rem;
+}

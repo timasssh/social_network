@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import type User from "../types/User"
 
 import style from "./styles/UserProfileComponent.module.css"
 
 import { FaGem } from "react-icons/fa"
 import { TemporaryMessageComponent } from "./TemporaryMessageComponent"
-import { fetchEditProfile } from "../services/UserService"
+import { fetchDeleteProfile, fetchEditProfile } from "../services/UserService"
 import { useAuth } from "./AuthProviderComponent"
 import { ErrorComponent } from "./ErrorComponent"
+import { BsTrashFill } from "react-icons/bs"
+import { GoX } from "react-icons/go"
 
 type userProfileProps = {
     user: User,
@@ -25,8 +27,11 @@ export function UserProfileComponent(props: userProfileProps) {
     const [editedUsername, setEditedUsername] = useState(props.user.username);
     const [currentUsername, setCurrentUsername] = useState(props.user.username);
 
+    const [deleteProfileMenuVisibility, setDeleteProfileMenuVisibility] = useState(false);
+
     const [error, setError] = useState<Error | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
+    const [redirect, setRedirect] = useState<string | undefined>(undefined);
 
     // TODO: fetch api to update profile
     async function handleEditProfile() {
@@ -60,8 +65,21 @@ export function UserProfileComponent(props: userProfileProps) {
         }
     }
 
+    async function handleDeleteProfile() {
+        setDeleteProfileMenuVisibility(false);
+        try {
+            if(!token) throw new Error("Sessão de usuário inválida!");
+
+            await fetchDeleteProfile(token);
+
+            setRedirect("/");
+            setSuccess("A sua conta foi excluída com sucesso!");
+        } catch (error) {
+            setError(new Error(error instanceof Error ? error.message : "Erro inesperado!"));
+        }
+    }
+
     if(editingProfile) return <>
-        {error && <TemporaryMessageComponent text={error.message} displayingSeconds={3} setVariableToNull={setError} />}
         <article className={style.profileWrapper} >
             <img className={style.userBanner} src="/background_texture_banner_image.jpg" alt="user banner image" />
             <section className={style.userWrapper} >
@@ -75,31 +93,49 @@ export function UserProfileComponent(props: userProfileProps) {
                     </div>
                 </section>
                 <section className={style.actions} >
-                    <button onClick={handleEditProfile} style={{padding: "0.5rem 3rem"}} className="defaultButton">Salvar</button>
-                    <button onClick={() => setEditingProfile(false)} style={{padding: "0.5rem 3rem"}} className="defaultButton">Cancelar</button>
+                    <button onClick={handleEditProfile} className={"defaultButton " + style.actionButton}>Salvar</button>
+                    <button onClick={() => setEditingProfile(false)} className={"defaultButton " + style.actionButton}>Cancelar</button>
+                    <button onClick={() => setDeleteProfileMenuVisibility(true)} className={style.actionButton +" defaultButton " + style.deleteAccountButton}>Delete profile<BsTrashFill /></button>
+                    <p>{props.user.followers} followers</p>
+                </section>
+            </section>
+        </article>
+        {deleteProfileMenuVisibility && 
+            <div className="popUpMenu">
+                <article className={style.deleteProfileMenu}>
+                    <button type="button" className="closePopUpMenu" onClick={() => setDeleteProfileMenuVisibility(false)}><GoX /></button>
+                    <h3>Você tem certeza?</h3>
+                    <p>Você deseja excluir sua conta?</p>
+                    <small className="errorMessage">* essa ação é irreversível!</small>
+                    <section>
+                        <button className={"defaultButton " + style.actionButton} onClick={handleDeleteProfile}>Sim</button>
+                        <button className={"defaultButton " + style.actionButton} onClick={() => setDeleteProfileMenuVisibility(false)}>Cancelar</button>
+                    </section>
+                </article>
+            </div>
+        }
+        {error && <TemporaryMessageComponent text={error.message} displayingSeconds={3} setVariableToNull={setError} />}
+    </>
+
+    return <>
+        <article className={style.profileWrapper} >
+            {success && <TemporaryMessageComponent text={success} displayingSeconds={3} setVariableToNull={setSuccess} redirectionLink={redirect} />}
+            <img className={style.userBanner} src="/background_texture_banner_image.jpg" alt="user banner image" />
+            <section className={style.userWrapper} >
+                <img className={style.userPhoto} src="/user_photo_icon.svg" alt="user photo image" />
+                <section className={style.userInfoWrapper} >
+                    <h2 className={style.userNameInfo}>{currentName}</h2>
+                    <p>@{currentUsername}</p>
+                    {props.user.premium && <FaGem />}
+                </section>
+                <section className={style.actions} >
+                    {props.owner
+                        ? <button onClick={() => setEditingProfile(true)} style={{padding: "0.5rem 3rem"}} className="defaultButton">editar perfil</button>
+                        : <button style={{padding: "0.5rem 3rem"}} className="defaultButton">seguir</button>
+                    }
                     <p>{props.user.followers} followers</p>
                 </section>
             </section>
         </article>
     </>
-
-    return <article className={style.profileWrapper} >
-        {success && <TemporaryMessageComponent text={success} displayingSeconds={3} setVariableToNull={setSuccess} />}
-        <img className={style.userBanner} src="/background_texture_banner_image.jpg" alt="user banner image" />
-        <section className={style.userWrapper} >
-            <img className={style.userPhoto} src="/user_photo_icon.svg" alt="user photo image" />
-            <section className={style.userInfoWrapper} >
-                <h2 className={style.userNameInfo}>{currentName}</h2>
-                <p>@{currentUsername}</p>
-                {props.user.premium && <FaGem />}
-            </section>
-            <section className={style.actions} >
-                {props.owner
-                    ? <button onClick={() => setEditingProfile(true)} style={{padding: "0.5rem 3rem"}} className="defaultButton">editar perfil</button>
-                    : <button style={{padding: "0.5rem 3rem"}} className="defaultButton">seguir</button>
-                }
-                <p>{props.user.followers} followers</p>
-            </section>
-        </section>
-    </article>
 }

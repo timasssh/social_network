@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ErrorComponent } from "./components/ErrorComponent";
 import { useEffect, useState } from "react";
 import type User from "./types/User";
@@ -13,6 +13,11 @@ export function UserPage() {
     const params = useParams();
     const username = params.username;
     if(!username) return <ErrorComponent error={new Error("Searching error")} errorTitle="Algo deu errado enquanto caregava informações do usuário :(" />
+
+    if(username === sessionStorage.getItem("username")) {
+        const navigate = useNavigate();
+        navigate("/me");
+    }
 
     const [userData, setUserData] = useState<User | null>(null);
     const [userDataError, setUserDataError] = useState<Error | null>(null);

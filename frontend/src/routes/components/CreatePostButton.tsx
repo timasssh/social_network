@@ -94,9 +94,9 @@ export function CreatePostButton() {
     
         <button onClick={() => setMenuIsHidden(!menuIsHidden)} aria-description="button to create a post; button to post something in your account" className={style.createPostButton}><LogoComponent onlyIcon={true} /></button>
 
-        {!menuIsHidden && <article className={style.menu}>
+        {!menuIsHidden && <article className="popUpMenu">
             <form onSubmit={handleSubmit} method="post">
-                <button type="button" className={style.closeMenuButton} onClick={() => setMenuIsHidden(true)}><GoX /></button>
+                <button type="button" className="closePopUpMenu" onClick={() => setMenuIsHidden(true)}><GoX /></button>
                 <h2>No que você está pensando?...</h2>
                 <label htmlFor="postTitleInput">Digite o titulo do post:</label>
                 <section className={style.formularyInputMessageSection}>

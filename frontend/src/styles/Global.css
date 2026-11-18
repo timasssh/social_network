@@ -59,3 +59,34 @@ form section {
 .simpleShadow {
     box-shadow: #00000040 6px 10px 8px;
 }
+
+.popUpMenu {
+    width: 100%;
+    height: 100%;
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    transform: translateY(-50%) translateX(-50%);
+
+    background-color: #00000080;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+body:has(.popUpMenu) {
+    overflow: hidden;
+}
+.closePopUpMenu {
+    place-self: end;
+    width: 3rem;
+
+    cursor: pointer;
+}
+.popUpMenu [aria-invalid="true"] {
+    outline: #ff0000 solid 2px;
+}

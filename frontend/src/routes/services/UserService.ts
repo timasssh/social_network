@@ -68,3 +68,19 @@ export async function fetchEditProfile(
         throw new Error(`Erro HTTP: ${response.status}`);
     }
 }
+export async function fetchDeleteProfile(
+    token: string
+): Promise<void> {
+    if(!token) throw new Error("Invalid session token :(");
+
+    const response = await fetch(`/api/me`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+}
