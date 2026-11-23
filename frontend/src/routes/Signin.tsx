@@ -76,6 +76,7 @@ export function SignIn() {
 
             setAuthData(data);
             login(data.accessToken);
+            saveDataAtStorage(data.user.name, data.user.username);
 
             sessionStorage.setItem("premium", `${data.user.premium}`);
             sessionStorage.setItem("premium2", JSON.stringify(data.user.premium));
