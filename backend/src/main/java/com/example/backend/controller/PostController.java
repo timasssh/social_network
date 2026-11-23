@@ -44,6 +44,29 @@ public class PostController {
     }
 
     @SecurityRequirement(name = "bearerAuth")
+    @PostMapping("/{id}/like")
+    public ResponseEntity likePost(@AuthenticationPrincipal User user, @PathVariable Long id) {
+        try {
+            postService.incrementPostLikes(id, user);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+    @SecurityRequirement(name = "bearerAuth")
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity dislikePost(@AuthenticationPrincipal User user, @PathVariable Long id) {
+        try {
+            postService.decrementPostLikes(id, user);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping
     public ResponseEntity createPost(@AuthenticationPrincipal User user, @RequestBody PostRequestDTO postRequestDTO) {
         try {

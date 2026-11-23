@@ -77,6 +77,24 @@ public class PostService {
             throw new Exception("Failed to edit post!");
         }
     }
+    public void incrementPostLikes(Long id, User user) throws Exception {
+//        if (user)
+
+        try {
+            postRepository.incrementPostLikes(id);
+        } catch (Exception exception) {
+            throw new Exception("Failed to edit post!: " + exception.getMessage());
+        }
+    }
+    public void decrementPostLikes(Long id, User user) throws Exception {
+//        if (user)
+
+        try {
+            postRepository.decrementPostLikes(id);
+        } catch (Exception exception) {
+            throw new Exception("Failed to edit post!: " + exception.getMessage());
+        }
+    }
 
     public static @NonNull Post convertDTOToPost(@NonNull PostRequestDTO postRequestDTO, User postAuthor) {
         Post newPost = new Post();
