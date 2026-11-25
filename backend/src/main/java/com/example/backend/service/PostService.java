@@ -6,10 +6,10 @@ import com.example.backend.dto.ResponsePostDTO;
 import com.example.backend.entity.Post;
 import com.example.backend.entity.User;
 import com.example.backend.exception.PermissionDeniedException;
+import com.example.backend.repository.LikeRepository;
 import com.example.backend.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final LikeRepository likeRepository;
 
     public ResponsePostDTO selectPostById(Long id) throws RuntimeException{
         return convertPostToDTO(
@@ -77,36 +78,17 @@ public class PostService {
             throw new Exception("Failed to edit post!");
         }
     }
-    public void incrementPostLikes(Long id, User user) throws Exception {
-//        if (user)
-
-        try {
-            postRepository.incrementPostLikes(id);
-        } catch (Exception exception) {
-            throw new Exception("Failed to edit post!: " + exception.getMessage());
-        }
-    }
-    public void decrementPostLikes(Long id, User user) throws Exception {
-//        if (user)
-
-        try {
-            postRepository.decrementPostLikes(id);
-        } catch (Exception exception) {
-            throw new Exception("Failed to edit post!: " + exception.getMessage());
-        }
-    }
 
     public static @NonNull Post convertDTOToPost(@NonNull PostRequestDTO postRequestDTO, User postAuthor) {
         Post newPost = new Post();
 
         newPost.setTitle(postRequestDTO.title());
         newPost.setMessage(postRequestDTO.message());
-        newPost.setLikes(0);
         newPost.setAuthor(postAuthor);
 
         return newPost;
     }
-    public static @NonNull ResponsePostDTO convertPostToDTO(@NonNull Post postToConvert) {
+    public @NonNull ResponsePostDTO convertPostToDTO(@NonNull Post postToConvert) {
         return new ResponsePostDTO(postToConvert.getId(), postToConvert.getTitle(), postToConvert.getMessage(), postToConvert.getAuthor().getUsername(), postToConvert.getLikes());
     }
     public @NonNull Post getPostFromResponsePostDTO(@NonNull ResponsePostDTO responsePostDTO) {

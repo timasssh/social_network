@@ -23,7 +23,7 @@ public class UserService {
     @Autowired
     private PostRepository postRepository;
     @Autowired
-    private PostService postService;
+    private PostService postService; // TODO: desvincular UserService de PostService
 
     public List<ResponseUserDTO> selectAllUsers() {
         try {
@@ -88,7 +88,7 @@ public class UserService {
             List<ResponsePostDTO> response = new ArrayList<>();
 
             for(Post currentPost : posts) {
-                response.add(PostService.convertPostToDTO(currentPost));
+                response.add(postService.convertPostToDTO(currentPost));
             }
 
             return response;

@@ -23,9 +23,6 @@ public class Post {
     @Column(nullable = false)
     private String message;
 
-    @Column(nullable = false)
-    private int likes;
-
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private User author;
