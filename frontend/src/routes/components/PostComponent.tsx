@@ -77,9 +77,6 @@ export function PostComponent(postProps: postProps) {
         }
         setDisplayCommentMenu(true);
     }
-    async function commentPost() {
-        
-    }
 
     function handleMenuOptionsClick() {
         setShowPostOptionsMenu(!showPostOptionsMenu)
@@ -140,7 +137,7 @@ export function PostComponent(postProps: postProps) {
     </>
 
     return <article className={style.post + " simpleShadow"}>
-        {displayCommentMenu && <CreateCommentMenuComponent setErrorMessageFunction={setError} setSuccessMessageFunction={setSuccess} setVisibilityOfMenu={setDisplayCommentMenu} />}
+        {displayCommentMenu && <CreateCommentMenuComponent setErrorMessageFunction={setError} setSuccessMessageFunction={setSuccess} setVisibilityOfMenu={setDisplayCommentMenu} parent_comment_id={null} parent_post_id={postProps.id} />}
 
         {error !== null && <TemporaryMessageComponent displayingSeconds={3} text={error.message} setVariableToNull={setError} />}
         {success !== null && <TemporaryMessageComponent displayingSeconds={3} text={success} setVariableToNull={setSuccess} />}

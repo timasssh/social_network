@@ -67,7 +67,7 @@ export function CreatePostButton() {
             const data = await fetchNewPost(
                 trimmedTitle,
                 trimmedMessage,
-                sessionStorage.getItem("token")
+                token
             );
 
             setCreatedPost(data);
