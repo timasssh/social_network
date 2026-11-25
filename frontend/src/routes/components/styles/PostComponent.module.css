@@ -25,8 +25,18 @@
     text-decoration: underline;
     color: #4949F9;
 }
-.likePostButton {
+.postInteractions {
+    display: flex;
+    gap: 1rem;
+}
+.postInteractionButton {
+    font-size: 1.2rem;
+    color: #000000C0;
     cursor: pointer;
+    transition: 0.4s;
+}
+.postInteractionButton:hover {
+    color: #000000;
 }
 .postInteractionInfo {
     display: flex;

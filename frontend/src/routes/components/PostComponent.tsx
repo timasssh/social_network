@@ -10,6 +10,8 @@ import { Link } from "react-router-dom"
 import { HiDotsHorizontal } from "react-icons/hi"
 import { FaGem } from "react-icons/fa"
 import { BsTrashFill } from "react-icons/bs"
+import { HiAnnotation } from "react-icons/hi"
+import CreateCommentMenuComponent from "./CreateCommentMenuComponent"
 
 type postProps = {
     "title": string,
@@ -38,6 +40,8 @@ export function PostComponent(postProps: postProps) {
     const [editedMessage, setEditedMessage] = useState(postProps.message);
     const [currentMessage, setCurrentMessage] = useState(postProps.message);
 
+    const [displayCommentMenu, setDisplayCommentMenu] = useState(false);
+
     async function likePost() {
         if(!token) throw new Error("Faça login para interagir com posts!");
 
@@ -65,6 +69,16 @@ export function PostComponent(postProps: postProps) {
                 setError(error);
             }
         }
+    }
+    function handleCreateCommentClick() {
+        if(!token) {
+            setError(new Error("Faça login para interagir com posts!"));
+            return;
+        }
+        setDisplayCommentMenu(true);
+    }
+    async function commentPost() {
+        
     }
 
     function handleMenuOptionsClick() {
@@ -126,6 +140,8 @@ export function PostComponent(postProps: postProps) {
     </>
 
     return <article className={style.post + " simpleShadow"}>
+        {displayCommentMenu && <CreateCommentMenuComponent setErrorMessageFunction={setError} setSuccessMessageFunction={setSuccess} setVisibilityOfMenu={setDisplayCommentMenu} />}
+
         {error !== null && <TemporaryMessageComponent displayingSeconds={3} text={error.message} setVariableToNull={setError} />}
         {success !== null && <TemporaryMessageComponent displayingSeconds={3} text={success} setVariableToNull={setSuccess} />}
         <section className={style.postActions} >
@@ -152,7 +168,12 @@ export function PostComponent(postProps: postProps) {
         <section className={style.postInteractions}>
             <span className={style.postInteractionInfo} 
             onClick={() => !token ? setError(new Error("Faça login para interagir com posts!")) : isLiked ? dislikePost() : likePost()}>
-                {!isLiked ? <GoHeart className={style.likePostButton} /> : <GoHeartFill  className={style.likePostButton} />}{likesTotal}
+                {!isLiked ? <GoHeart className={style.postInteractionButton} /> : <GoHeartFill  className={style.postInteractionButton} />}{likesTotal}
+            </span>
+            <span className={style.postInteractionInfo}
+            onClick={handleCreateCommentClick}>
+                <HiAnnotation className={style.postInteractionButton} />
+                {likesTotal}
             </span>
         </section>
     </article>
